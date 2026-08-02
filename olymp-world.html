@@ -40,7 +40,6 @@
   }
 
   .mono{ font-family: 'JetBrains Mono', monospace; }
-
   a{ color: inherit; text-decoration: none; }
 
   .wrap{
@@ -51,13 +50,12 @@
 
   ::selection{ background: var(--orange); color: #170e07; }
 
-  a:focus-visible, button:focus-visible{
+  a:focus-visible, button:focus-visible, input:focus-visible{
     outline: 2px solid var(--gold);
     outline-offset: 3px;
     border-radius: 4px;
   }
 
-  /* ---------- background texture ---------- */
   body::before{
     content: "";
     position: fixed;
@@ -71,7 +69,6 @@
     z-index: 0;
   }
 
-  /* ---------- nav ---------- */
   header{
     position: sticky;
     top: 0;
@@ -115,11 +112,34 @@
     text-transform: uppercase;
   }
 
+  .nav-right-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .lang-btn {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .lang-btn:hover { border-color: var(--orange); }
+  .lang-btn .lang-option.active { color: var(--orange); font-weight: 700; }
+  .lang-btn .lang-divider { opacity: 0.4; }
+
   .status-pill{
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-left: 6px;
     padding: 7px 14px;
     border: 1px solid var(--line);
     border-radius: 999px;
@@ -139,9 +159,6 @@
   @keyframes pulse{
     0%, 100%{ opacity: 1; transform: scale(1); }
     50%{ opacity: 0.5; transform: scale(0.8); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .status-dot{ animation: none; }
   }
 
   .nav-links{
@@ -165,7 +182,6 @@
   .nav-cta:hover{ background: var(--orange); color: #170e07 !important; }
   .nav-toggle{ display: none; }
 
-  /* ---------- hero ---------- */
   .hero{
     position: relative;
     padding: 110px 32px 150px;
@@ -173,7 +189,6 @@
     overflow: hidden;
     z-index: 1;
   }
-
   .sun{
     position: absolute;
     top: -180px;
@@ -187,7 +202,6 @@
     opacity: 0.9;
     z-index: -2;
   }
-
   .torii{
     position: absolute;
     bottom: 0; left: 50%;
@@ -197,7 +211,6 @@
     z-index: -1;
     opacity: 0.92;
   }
-
   .eyebrow{
     display: inline-flex;
     align-items: center;
@@ -215,7 +228,6 @@
     background: var(--gold);
     opacity: 0.6;
   }
-
   .hero h1{
     font-size: clamp(48px, 8vw, 96px);
     font-weight: 800;
@@ -223,14 +235,12 @@
     text-shadow: 0 8px 40px rgba(255,122,41,0.25);
   }
   .hero h1 .accent{ color: var(--orange); }
-
   .hero-sub{
     max-width: 560px;
     margin: 26px auto 44px;
     color: var(--text-muted);
     font-size: 17px;
   }
-
   .hero-actions{
     display: flex;
     justify-content: center;
@@ -238,7 +248,6 @@
     flex-wrap: wrap;
     margin-bottom: 54px;
   }
-
   .btn{
     padding: 15px 30px;
     border-radius: 8px;
@@ -298,7 +307,6 @@
     transition: background 0.2s ease;
   }
   .ip-chip button:hover{ background: var(--gold); }
-
   .version-badge{
     display: inline-block;
     margin-top: 22px;
@@ -327,7 +335,6 @@
   }
   .social-row a:hover{ color: var(--orange); border-color: var(--orange); }
 
-  /* petals */
   .petal{
     position: absolute;
     top: -5%;
@@ -341,12 +348,7 @@
   @keyframes fall{
     to{ transform: translateY(115vh) rotate(220deg); }
   }
-  @media (prefers-reduced-motion: reduce){
-    .petal{ display: none; }
-    html{ scroll-behavior: auto; }
-  }
 
-  /* ---------- section shell ---------- */
   section{ position: relative; z-index: 1; }
   .section-head{
     text-align: center;
@@ -364,7 +366,6 @@
     font-size: 15px;
   }
 
-  /* ---------- steps ---------- */
   .steps{ padding: 40px 32px 120px; }
   .steps-grid{
     display: grid;
@@ -379,6 +380,8 @@
     position: relative;
     overflow: hidden;
     transition: border-color 0.25s ease, transform 0.25s ease;
+    display: flex;
+    flex-direction: column;
   }
   .step-card:hover{ border-color: rgba(255,122,41,0.4); transform: translateY(-4px); }
   .step-kanji{
@@ -399,24 +402,13 @@
     color: var(--orange);
     margin-bottom: 10px;
   }
-  .step-card h3{
-    font-size: 22px;
-    margin-bottom: 12px;
-    font-weight: 700;
-  }
-  .step-card p{
-    color: var(--text-muted);
-    font-size: 14.5px;
-    margin: 0 0 24px;
-    min-height: 84px;
-  }
-  .step-card .btn{ width: 100%; text-align: center; }
+  .step-card h3{ font-size: 22px; margin-bottom: 12px; font-weight: 700; }
+  .step-card p{ color: var(--text-muted); font-size: 14.5px; margin: 0 0 24px; flex-grow: 1; }
+  .step-card .btn{ width: 100%; text-align: center; margin-top: auto; }
 
-  /* ---------- features ---------- */
   .features{
     padding: 20px 32px 120px;
-    background:
-      linear-gradient(180deg, transparent, rgba(255,122,41,0.04) 40%, transparent 100%);
+    background: linear-gradient(180deg, transparent, rgba(255,122,41,0.04) 40%, transparent 100%);
   }
   .features-grid{
     display: grid;
@@ -438,172 +430,203 @@
     margin-bottom: 14px;
     display: block;
   }
-  .feature-card h4{
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .feature-card p{
-    font-size: 13.5px;
-    color: var(--text-muted);
-    margin: 0;
-  }
+  .feature-card h4{ font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .feature-card p{ font-size: 13.5px; color: var(--text-muted); margin: 0; }
 
-  /* ---------- donate widget ---------- */
-  .donate{ padding: 20px 32px 120px; }
-  .donate-widget{
-    max-width: 780px;
+  /* Блок Реєстрації / Акаунта */
+  .auth-section{ padding: 20px 32px 120px; }
+  .auth-widget{
+    max-width: 860px;
     margin: 0 auto;
     background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
     border: 1px solid rgba(255,122,41,0.3);
     border-radius: 18px;
-    padding: 36px 36px 32px;
+    padding: 40px;
     box-shadow: var(--shadow);
   }
   .widget-top h3{
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 32px;
+    font-weight: 800;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 10px;
-  }
-  .coin-badge{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    background: rgba(255,122,41,0.15);
-    color: var(--gold);
-    border: 1px solid rgba(255,122,41,0.35);
-    padding: 3px 10px;
-    border-radius: 999px;
+    margin-bottom: 12px;
   }
   .widget-top p{
     color: var(--text-muted);
-    font-size: 14px;
-    max-width: 560px;
-    margin: 0 0 30px;
-  }
-  .widget-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 26px;
-  }
-  .widget-col label{
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .widget-col input[type="text"],
-  .widget-col input[type="number"]{
-    width: 100%;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 13px 14px;
-    color: var(--text);
-    font-family: 'Zen Kaku Gothic New', sans-serif;
     font-size: 14.5px;
-  }
-  .widget-col input:focus{ outline: none; border-color: var(--orange); }
-  .amount-input-wrap{
-    position: relative;
-    margin-bottom: 12px;
-  }
-  .amount-input-wrap input{ padding-right: 90px; }
-  .coin-preview{
-    position: absolute;
-    right: 12px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--gold);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .bonus-row{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .bonus-btn{
-    flex: 1;
-    min-width: 118px;
-    background: rgba(0,0,0,0.25);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 9px 6px;
-    color: var(--text-muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .bonus-btn:hover, .bonus-btn.active{
-    border-color: var(--orange);
-    color: var(--orange);
-  }
-  .field-hint{
-    font-size: 12px;
-    color: var(--text-muted);
-    margin: 8px 0 0;
-  }
-  .widget-methods{ margin-bottom: 22px; }
-  .widget-methods > label{
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .method-tiles{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .method-tile{
-    text-align: left;
-    background: rgba(0,0,0,0.25);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 16px 18px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    transition: all 0.2s ease;
-  }
-  .method-tile:hover{ border-color: rgba(255,122,41,0.4); }
-  .method-tile.selected{
-    border-color: var(--orange);
-    background: rgba(255,122,41,0.1);
-    box-shadow: 0 0 0 1px rgba(255,122,41,0.3) inset;
-  }
-  .method-name{ font-weight: 700; font-size: 15px; color: var(--text); }
-  .method-sub{ font-size: 12px; color: var(--text-muted); }
-  .terms-row{
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    cursor: pointer;
-  }
-  .terms-row input{ margin-top: 3px; accent-color: var(--orange); }
-  .terms-row a{ color: var(--orange); text-decoration: underline; }
-  .widget-continue{ width: 100%; }
-  #donateError{ margin: -8px 0 16px; }
-  .donate-note{
-    max-width: 620px;
-    margin: 32px auto 0;
-    text-align: center;
-    font-size: 12.5px;
-    color: var(--text-muted);
+    max-width: 780px;
+    margin: 0 0 30px;
+    line-height: 1.5;
   }
 
-  /* ---------- FAQ ---------- */
+  .form-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .widget-group{ margin-bottom: 18px; }
+  .widget-group.full{ grid-column: span 2; }
+  .widget-group label{
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .input-box{
+    position: relative;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    transition: border-color 0.2s ease;
+  }
+  .input-box:focus-within{ border-color: var(--orange); }
+  .input-box input{
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 14px 0;
+    color: var(--text);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 15px;
+  }
+  .input-box input:focus{ outline: none; }
+
+  .auth-error{
+    font-size: 13px;
+    color: #ff8a6a;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .auth-error.show{ display: block; }
+
+  /* Кабінет гравця */
+  .profile-panel{
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .profile-panel.active{ display: block; }
+  @keyframes fadeIn{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  .profile-header-card{
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .profile-user-info h4{ font-size: 22px; font-weight: 700; color: var(--gold); margin: 0 0 4px; }
+  .profile-user-info span{ font-size: 13px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+  .profile-stats-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .stat-card{
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+  .stat-card .stat-label{ font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: block; margin-bottom: 6px; }
+  .stat-card .stat-val{ font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--gold); }
+
+  /* Блок донату */
+  .donate{ padding: 20px 32px 120px; }
+  .donate-widget{
+    max-width: 920px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border: 1px solid rgba(255,122,41,0.3);
+    border-radius: 18px;
+    padding: 40px 40px 36px;
+    box-shadow: var(--shadow);
+  }
+  .section-block-title{
+    font-size: 14px;
+    font-weight: 700;
+    margin: 28px 0 12px;
+    display: block;
+  }
+  .privilege-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .priv-card{
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.2s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .priv-card:hover{ border-color: rgba(255,122,41,0.4); }
+  .priv-popular{
+    position: absolute;
+    top: -10px; right: 16px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    color: #170e07;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .priv-header{ margin-bottom: 14px; }
+  .priv-title{ font-size: 20px; font-weight: 700; font-family: 'Shippori Mincho', serif; margin-bottom: 4px; display: block; }
+  .priv-price{ font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--orange); }
+  .priv-price small{ font-size: 13px; font-weight: 400; color: var(--text-muted); }
+  .priv-features{
+    list-style: none;
+    padding: 0; margin: 0 0 16px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .priv-features li{ margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .priv-features li::before{ content: "—"; color: var(--orange); }
+  .priv-pay-btn{
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #170e07;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 4px 12px rgba(255,122,41,0.25);
+    display: block;
+    text-decoration: none;
+  }
+  .priv-pay-btn:hover{ opacity: 0.9; transform: translateY(-1px); }
+
   .faq{ padding: 20px 32px 120px; }
   .faq-list{
     max-width: 760px;
@@ -654,168 +677,9 @@
     color: #170e07;
     transform: rotate(45deg);
   }
-  .faq-a{
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  .faq-a p{
-    margin: 0;
-    padding: 0 24px 22px;
-    color: var(--text-muted);
-    font-size: 14px;
-    max-width: 620px;
-  }
+  .faq-a{ max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-a p{ margin: 0; padding: 0 24px 22px; color: var(--text-muted); font-size: 14px; max-width: 620px; }
 
-  /* ---------- payment modal ---------- */
-  .modal-overlay{
-    position: fixed;
-    inset: 0;
-    background: rgba(6,5,4,0.78);
-    backdrop-filter: blur(4px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 100;
-  }
-  .modal-overlay.open{ display: flex; }
-  .modal-box{
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
-    border: 1px solid rgba(255,122,41,0.35);
-    border-radius: 16px;
-    padding: 32px 28px 28px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-  }
-  .modal-close{
-    position: absolute;
-    top: 16px; right: 16px;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: none;
-    color: var(--text-muted);
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-  }
-  .modal-close:hover{ color: var(--orange); border-color: var(--orange); }
-  .modal-eyebrow{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-  .modal-box h3{
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .modal-price{
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--orange);
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 22px;
-  }
-  .modal-field{
-    margin-bottom: 16px;
-  }
-  .modal-field label{
-    display: block;
-    font-size: 12.5px;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
-  .modal-field input{
-    width: 100%;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 11px 14px;
-    color: var(--text);
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-size: 14px;
-  }
-  .modal-field input:focus{
-    outline: none;
-    border-color: var(--orange);
-  }
-  .modal-field select{
-    width: 100%;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 11px 14px;
-    color: var(--text);
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  .modal-field select:focus{
-    outline: none;
-    border-color: var(--orange);
-  }
-  .modal-card-row{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 18px;
-  }
-  .modal-card-row span.card-num{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-    color: var(--gold);
-    letter-spacing: 0.02em;
-  }
-  .modal-card-row button{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: none;
-    background: var(--orange);
-    color: #170e07;
-    font-weight: 700;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-  .modal-card-row button:hover{ background: var(--gold); }
-  .modal-hint{
-    font-size: 12.5px;
-    color: var(--text-muted);
-    margin: 0 0 22px;
-    line-height: 1.5;
-  }
-  .modal-hint b{ color: var(--text); }
-  .modal-box .btn{ width: 100%; text-align: center; }
-  #liqpayEmbed{
-    min-height: 320px;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .modal-error{
-    font-size: 12px;
-    color: #ff8a6a;
-    margin: -10px 0 14px;
-    display: none;
-  }
-  .modal-error.show{ display: block; }
-
-  /* ---------- cta band ---------- */
   .cta-band{
     margin: 0 32px 120px;
     max-width: 1116px;
@@ -831,20 +695,11 @@
     color: #170e07;
     box-shadow: 0 30px 70px rgba(255,122,41,0.25);
   }
-  .cta-band h3{
-    font-size: clamp(24px, 3vw, 32px);
-    font-weight: 800;
-    max-width: 420px;
-  }
+  .cta-band h3{ font-size: clamp(24px, 3vw, 32px); font-weight: 800; max-width: 420px; }
   .cta-band p{ margin: 8px 0 0; opacity: 0.75; font-size: 14px; max-width: 420px; }
-  .cta-band .btn-primary{
-    background: #170e07;
-    color: var(--gold);
-    box-shadow: none;
-  }
+  .cta-band .btn-primary{ background: #170e07; color: var(--gold); box-shadow: none; }
   .cta-band .btn-primary:hover{ background: #241609; }
 
-  /* ---------- footer ---------- */
   footer{
     border-top: 1px solid var(--line);
     padding: 44px 32px;
@@ -859,29 +714,20 @@
     gap: 20px;
   }
   .footer-inner .logo{ font-size: 16px; }
-  .footer-links{
-    display: flex;
-    gap: 26px;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
+  .footer-links{ display: flex; gap: 26px; font-size: 13px; color: var(--text-muted); }
   .footer-links a:hover{ color: var(--orange); }
-  .footer-copy{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    opacity: 0.6;
-  }
+  .footer-copy{ font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); opacity: 0.6; }
 
-  /* ---------- responsive ---------- */
+  @media (max-width: 960px){
+    .privilege-grid{ grid-template-columns: repeat(2, 1fr); }
+    .profile-stats-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
   @media (max-width: 880px){
     .steps-grid{ grid-template-columns: 1fr; }
     .features-grid{ grid-template-columns: repeat(2, 1fr); }
-    .donate-widget{ padding: 28px 22px 24px; }
-    .widget-grid{ grid-template-columns: 1fr; }
-    .method-tiles{ grid-template-columns: 1fr; }
-    .bonus-row{ flex-direction: column; }
-    .bonus-btn{ width: 100%; }
+    .form-grid{ grid-template-columns: 1fr; }
+    .widget-group.full{ grid-column: span 1; }
+    .privilege-grid{ grid-template-columns: 1fr; }
     .status-pill{ display: none; }
     .nav-links{
       position: fixed;
@@ -912,9 +758,7 @@
   @media (max-width: 560px){
     .features-grid{ grid-template-columns: 1fr; }
     .cta-band{ flex-direction: column; text-align: center; padding: 40px 28px; }
-    .cta-band p{ margin-inline: auto; }
-    .faq-q{ font-size: 14px; padding: 16px 18px; }
-    .faq-a p{ padding: 0 18px 18px; }
+    .profile-stats-grid{ grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -929,14 +773,24 @@
         <small>minecraft · 1.20.6</small>
       </div>
     </div>
-    <span class="status-pill"><span class="status-dot"></span>Сервер онлайн</span>
-    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+    <div class="nav-right-group">
+      <span class="status-pill"><span class="status-dot"></span><span data-i18n="status_online">Сервер онлайн</span></span>
+      
+      <button class="lang-btn" id="langBtn" type="button">
+        <span class="lang-option" data-lang="ua">UA</span>
+        <span class="lang-divider">/</span>
+        <span class="lang-option active" data-lang="ru">RU</span>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+    </div>
     <div class="nav-links" id="navLinks">
-      <a href="#home" class="active">Главная</a>
-      <a href="#steps">Как начать</a>
-      <a href="#features">Особенности</a>
-      <a href="#faq">FAQ</a>
-      <a href="#donate" class="nav-cta">Донат</a>
+      <a href="#home" class="active" data-i18n="nav_home">Главная</a>
+      <a href="#steps" data-i18n="nav_steps">Как начать</a>
+      <a href="#features" data-i18n="nav_features">Особенности</a>
+      <a href="#auth" data-i18n="nav_auth">Регистрация</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#donate" class="nav-cta" data-i18n="nav_donate">Донат</a>
     </div>
   </nav>
 </header>
@@ -957,22 +811,22 @@
     <div id="petals" aria-hidden="true"></div>
 
     <div class="wrap">
-      <div class="eyebrow">御 山 の 世 界 &nbsp;·&nbsp; Season One</div>
+      <div class="eyebrow" data-i18n="hero_eyebrow">御 山 の 世 界 &nbsp;·&nbsp; Season One</div>
       <h1>OLYMP<br><span class="accent">WORLD</span></h1>
-      <p class="hero-sub">Выживание в стиле Японии: анархия с кастомными предметами. Присоединяйся к сезону.</p>
+      <p class="hero-sub" data-i18n="hero_sub">Выживание в стиле Японии: анархия с кастомными предметами и уникальными рангами.</p>
 
       <div class="hero-actions">
-        <a href="#steps" class="btn btn-primary">Начать игру</a>
-        <a href="https://dsc.gg/olymp-world" class="btn btn-ghost" target="_blank" rel="noopener">Наш Discord</a>
+        <a href="#steps" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
+        <a href="#auth" class="btn btn-ghost" data-i18n="nav_auth">Регистрация</a>
       </div>
 
       <div class="ip-chip">
-        <span class="label">IP сервера</span>
+        <span class="label" data-i18n="ip_label">IP сервера</span>
         <span class="ip" id="ipText">olympworld.fun</span>
-        <button id="copyBtn" type="button">Копировать</button>
+        <button id="copyBtn" type="button" data-i18n="btn_copy">Копировать</button>
       </div>
 
-      <div class="version-badge">Java Edition &nbsp;·&nbsp; версия <b>1.20.6</b> &nbsp;·&nbsp; онлайн 24/7</div>
+      <div class="version-badge"><span data-i18n="ver_edition">Java Edition</span> &nbsp;·&nbsp; <span data-i18n="ver_text">версия</span> <b>1.20.6</b> &nbsp;·&nbsp; <span data-i18n="ver_online">онлайн</span> 24/7</div>
 
       <div class="social-row">
         <a href="https://dsc.gg/olymp-world" target="_blank" rel="noopener">Discord</a>
@@ -986,32 +840,33 @@
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">始め方</div>
-        <h2>Как начать играть</h2>
-        <p>Три шага — и за три минуты ты уже взрываешь базы или строишь свою.</p>
+        <h2 data-i18n="steps_title">Как начать играть</h2>
+        <p data-i18n="steps_sub">Три шага — и через три минуты ты уже на сервере.</p>
       </div>
 
       <div class="steps-grid">
         <div class="step-card">
           <span class="step-kanji">一</span>
-          <div class="step-label">Шаг 1</div>
-          <h3>Minecraft Java</h3>
-          <p>Для игры на Olymp World нужна лицензированная версия Minecraft Java Edition 1.20.6</p>
+          <div class="step-label" data-i18n="step1_label">ШАГ 1</div>
+          <h3 data-i18n="step1_title">Minecraft Java</h3>
+          <p data-i18n="step1_desc">Для игры на Olymp World нужна лицензионная версия Minecraft Java Edition 1.20.6</p>
+          <a href="#home" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
         </div>
 
         <div class="step-card">
           <span class="step-kanji">二</span>
-          <div class="step-label">Шаг 2</div>
-          <h3>Ресурспаки и шейдеры</h3>
-          <p>Ресурспак на сервере есть автоматически, а если хочешь скачать шейдер — лучший вариант Complementary Unbound.</p>
-          <a href="https://olympiumworld-ux.github.io/Olymp_World/#" class="btn btn-ghost" target="_blank" rel="noopener">Скачать шейдер</a>
+          <div class="step-label" data-i18n="step2_label">ШАГ 2</div>
+          <h3 data-i18n="step2_title">Ресурспаки и шейдеры</h3>
+          <p data-i18n="step2_desc">Ресурспак на сервере есть автоматически, а если хочешь скачать шейдер — лучший вариант Complementary Unbound.</p>
+          <a href="https://www.curseforge.com/minecraft/shaders/complementary-unbound" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn_shader">Скачать шейдер</a>
         </div>
 
         <div class="step-card">
           <span class="step-kanji">三</span>
-          <div class="step-label">Шаг 3</div>
-          <h3>Присоединение</h3>
-          <p>Запусти Minecraft, нажми «Мультиплеер» → «Добавить сервер» и вставь IP <span class="mono">olympworld.fun</span>. Готово — добро пожаловать в мир Олимпа!</p>
-          <a href="#" class="btn btn-ghost">Видео инструкция(отсутствует)</a>
+          <div class="step-label" data-i18n="step3_label">ШАГ 3</div>
+          <h3 data-i18n="step3_title">Присоединение</h3>
+          <p data-i18n="step3_desc">Запусти Minecraft, нажми «Мультиплеер» → «Добавить сервер» и вставь IP <b>olympworld.fun</b>. Готово — добро пожаловать в мир Олимпа!</p>
+          <a href="#home" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
         </div>
       </div>
     </div>
@@ -1021,31 +876,131 @@
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">世界の特徴</div>
-        <h2>Что ждёт в мире олимпа</h2>
-        <p>Сервер построен вокруг эстетики и духа классической Японии.</p>
+        <h2 data-i18n="features_title">Особенности сервера</h2>
+        <p data-i18n="features_sub">Сервер построен вокруг эстетики классической Японии с уникальными механиками.</p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card">
           <span class="feature-kanji">閃</span>
-          <h4>Шокер</h4>
-          <p>Кастомный предмет, который наносит урон и парализует врага на время.</p>
+          <h4 data-i18n="feat1_title">Шокер</h4>
+          <p data-i18n="feat1_desc">Кастомный инструмент, наносящий урон без отбрасывания врага.</p>
         </div>
         <div class="feature-card">
           <span class="feature-kanji">泥</span>
-          <h4>Слизевая волна</h4>
-          <p>Прилепляет врагов к полу на небольшое время.</p>
+          <h4 data-i18n="feat2_title">Слизевая волна</h4>
+          <p data-i18n="feat2_desc">Прилепляет противников к полу на короткое время.</p>
         </div>
         <div class="feature-card">
           <span class="feature-kanji">刀</span>
-          <h4>Кастомное оружие</h4>
-          <p>Катаны сабли и т.д.</p>
+          <h4 data-i18n="feat3_title">Кастомное оружие</h4>
+          <p data-i18n="feat3_desc">Уникальные катаны и снаряжение.</p>
         </div>
         <div class="feature-card">
           <span class="feature-kanji">家</span>
-          <h4>Строительство сервера</h4>
-          <p>В каждое здание была заложена душа создателей.</p>
+          <h4 data-i18n="feat4_title">Дизайн и постройки</h4>
+          <p data-i18n="feat4_desc">Каждое здание создано с особой атмосферой.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК РЕЄСТРАЦІЇ / ОСОБИСТОГО КАБІНЕТУ -->
+  <section class="auth-section" id="auth">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">登録 & Кабінет</div>
+        <h2 data-i18n="auth_section_title">Регистрация и личный кабинет</h2>
+        <p data-i18n="auth_section_sub">Зарегистрируйте аккаунт, чтобы управлять игровыми данными, токенами и статистикой.</p>
+      </div>
+
+      <div class="auth-widget">
+        
+        <!-- Форма реєстрації -->
+        <div id="registerFormView">
+          <div class="widget-top">
+            <h3 data-i18n="reg_title">Создать игровой аккаунт</h3>
+            <p data-i18n="reg_desc">Введите данные для привязки вашего персонажа к сайту проекта.</p>
+          </div>
+
+          <div class="auth-error" id="authError" data-i18n="error_fields">Заполните все обязательные поля формы!</div>
+
+          <form id="regForm">
+            <div class="form-grid">
+              <div class="widget-group">
+                <label data-i18n="label_login">Логин на сайте</label>
+                <div class="input-box">
+                  <input type="text" id="regLogin" placeholder="Ваш логін" required>
+                </div>
+              </div>
+
+              <div class="widget-group">
+                <label data-i18n="label_server_login">Логин (ник) на сервере</label>
+                <div class="input-box">
+                  <input type="text" id="regServerLogin" placeholder="Ваш нік в майнкрафті" required>
+                </div>
+              </div>
+
+              <div class="widget-group">
+                <label data-i18n="label_email">Email</label>
+                <div class="input-box">
+                  <input type="email" id="regEmail" placeholder="example@gmail.com" required>
+                </div>
+              </div>
+
+              <div class="widget-group">
+                <label data-i18n="label_site_pass">Придумайте пароль для сайта</label>
+                <div class="input-box">
+                  <input type="password" id="regSitePass" placeholder="••••••••" required>
+                </div>
+              </div>
+
+              <div class="widget-group full">
+                <label data-i18n="label_server_pass">Пароль от аккаунта на сервере</label>
+                <div class="input-box">
+                  <input type="password" id="regServerPass" placeholder="Пароль, який ви вводите на сервері (/login)" required>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 10px;" data-i18n="btn_register">Зарегистрироваться</button>
+          </form>
+        </div>
+
+        <!-- Особистий кабінет -->
+        <div class="profile-panel" id="profilePanelView">
+          <div class="profile-header-card">
+            <div class="profile-user-info">
+              <h4 id="profileUsername">Player</h4>
+              <span id="profileServerLoginInfo">Нік: -</span>
+            </div>
+            <button type="button" class="btn btn-ghost" id="logoutBtn" style="padding: 10px 20px; font-size: 13px;" data-i18n="btn_logout">Выйти</button>
+          </div>
+
+          <div class="profile-stats-grid">
+            <div class="stat-card">
+              <span class="stat-label" data-i18n="stat_tokens">Баланс токенов</span>
+              <span class="stat-val" id="profileTokens">150 🪙</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label" data-i18n="stat_rank">Ранг на сервере</span>
+              <span class="stat-val" id="profileRank" style="color:var(--orange)">Ашигару</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label" data-i18n="stat_kills">Убийств</span>
+              <span class="stat-val">24</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label" data-i18n="stat_deaths">Смертей</span>
+              <span class="stat-val">12</span>
+            </div>
+          </div>
+
+          <div style="text-align: center; color: var(--text-muted); font-size: 13.5px;" data-i18n="profile_notice">
+            Акаунт успішно синхронізовано з ігровим сервером 1.20.6. Ви можете купувати донат нижче.
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1054,63 +1009,64 @@
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">支援</div>
-        <h2>Поддержать сервер</h2>
-        <p>Донат помогает оплачивать хостинг, домен и развитие проекта.</p>
+        <h2 data-i18n="donate_title">Игровые привилегии</h2>
+        <p data-i18n="donate_sub">Выберите желаемый ранг и переходите к оплате на защищенную платформу.</p>
       </div>
 
       <div class="donate-widget">
         <div class="widget-top">
-          <h3>Донат <span class="coin-badge">×2</span></h3>
-          <p>Задонатив на проект, ты получишь Олимп-Монеты — за них можно купить привилегии, косметику и наборы в игре. Спасибо, что помогаешь серверу расти!</p>
+          <h3 data-i18n="widget_title">Магазин рангов</h3>
+          <p data-i18n="widget_desc">Поддержите развитие проекта и получите эксклюзивные команды, титулы и статус в чате.</p>
         </div>
 
-        <div class="widget-grid">
-          <div class="widget-col">
-            <label for="donateAmount">Укажи сумму</label>
-            <div class="amount-input-wrap">
-              <input type="number" id="donateAmount" placeholder="Сумма, грн" min="1" step="1">
-              <span class="coin-preview"><span id="coinAmount">0</span> 🪙</span>
+        <span class="section-block-title" data-i18n="label_privileges">Доступные привилегии</span>
+
+        <div class="privilege-grid">
+          <div class="priv-card">
+            <div class="priv-header">
+              <span class="priv-title" data-i18n="p_ashigaru_title">Ашигару</span>
+              <div class="priv-price">49 <small data-i18n="currency_uah">грн</small></div>
             </div>
-            <div class="bonus-row">
-              <button type="button" class="bonus-btn" data-amount="1500">+5% от 1 500₴</button>
-              <button type="button" class="bonus-btn" data-amount="3000">+7% от 3 000₴</button>
-              <button type="button" class="bonus-btn" data-amount="5000">+10% от 5 000₴</button>
-              <button type="button" class="bonus-btn" data-amount="10000">+15% от 10 000₴</button>
+            <ul class="priv-features">
+              <li data-i18n="p_ashigaru_f1">Одна точка /sethome</li>
+              <li data-i18n="p_ashigaru_f2">Значок в чате</li>
+              <li data-i18n="p_ashigaru_f3">Доступ /kit Ашигару</li>
+            </ul>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn" data-i18n="btn_donate_small">Донат</a>
+          </div>
+
+          <div class="priv-card">
+            <div class="priv-header">
+              <span class="priv-title" data-i18n="p_ronin_title">Ронин</span>
+              <div class="priv-price">99 <small data-i18n="currency_uah">грн</small></div>
             </div>
+            <ul class="priv-features">
+              <li data-i18n="p_ronin_f1">Две точки /sethome</li>
+              <li data-i18n="p_ronin_f2">Цветной ник в чате</li>
+              <li data-i18n="p_ronin_f3">Титул "Ронин"</li>
+              <li data-i18n="p_ronin_f4">Доступ /kit Ронина</li>
+              <li data-i18n="p_ronin_f5">Роль в Discord</li>
+            </ul>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn" data-i18n="btn_donate_small">Донат</a>
           </div>
 
-          <div class="widget-col">
-            <label for="donateLogin">Введи логин</label>
-            <input type="text" id="donateLogin" placeholder="Никнейм в игре (Minecraft)">
-            <p class="field-hint">Никнейм для зачисления доната</p>
+          <div class="priv-card">
+            <div class="priv-popular" data-i18n="badge_popular">Популярный</div>
+            <div class="priv-header">
+              <span class="priv-title" data-i18n="p_samurai_title">Самурай</span>
+              <div class="priv-price">249 <small data-i18n="currency_uah">грн</small></div>
+            </div>
+            <ul class="priv-features">
+              <li data-i18n="p_samurai_f1">Всё с ранга «Ронин»</li>
+              <li data-i18n="p_samurai_f2">Доступ /kit Самурай</li>
+              <li data-i18n="p_samurai_f3">Титул "Самурай"</li>
+              <li data-i18n="p_samurai_f4">Роль в Discord</li>
+            </ul>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn" data-i18n="btn_donate_small">Донат</a>
           </div>
         </div>
 
-        <div class="widget-methods">
-          <label>Выбери способ оплаты</label>
-          <div class="method-tiles">
-            <button type="button" class="method-tile" data-method="mono">
-              <span class="method-name">Monobank</span>
-              <span class="method-sub">Перевод картой любого украинского банка</span>
-            </button>
-            <button type="button" class="method-tile" data-method="privat">
-              <span class="method-name">Приват24</span>
-              <span class="method-sub">Перевод на карту ПриватБанка</span>
-            </button>
-          </div>
-        </div>
-
-        <label class="terms-row">
-          <input type="checkbox" id="donateTerms">
-          <span>Я принимаю условия <a href="#">пользовательского соглашения</a></span>
-        </label>
-
-        <p class="modal-error" id="donateError">Укажи сумму, логин, способ оплаты и прими условия соглашения.</p>
-
-        <button type="button" class="btn btn-primary widget-continue" id="donateContinue">Продолжить</button>
       </div>
-
-      <p class="donate-note">После перевода пришли скрин чека в наш Discord (dsc.gg/olymp-world) в тикет-канал — донат зачисляется вручную в течение нескольких минут.</p>
     </div>
   </section>
 
@@ -1118,58 +1074,27 @@
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">よくある質問</div>
-        <h2>Часто задаваемые вопросы</h2>
-        <p>Не нашёл ответ — спроси в нашем Discord.</p>
+        <h2 data-i18n="faq_title">Часто задаваемые вопросы</h2>
+        <p data-i18n="faq_sub">Не нашли ответ — спрашивайте в нашем Discord.</p>
       </div>
 
       <div class="faq-list" id="faqList">
         <div class="faq-item open">
           <button class="faq-q" type="button">
-            Какая версия нужна для игры?
+            <span data-i18n="faq1_q">Как зайти на сервер?</span>
             <span class="sign">+</span>
           </button>
           <div class="faq-a" style="max-height: 200px;">
-            <p>Лицензионная Minecraft Java Edition версии 1.20.6. Пиратки и другие версии (Bedrock, форки) сервером не поддерживаются.</p>
+            <p data-i18n="faq1_a">Скопируйте IP адрес olympworld.fun в главном меню игры (Мультиплеер -> Добавить сервер) и подключайтесь. Версия клиента должна быть 1.20.6.</p>
           </div>
         </div>
-
         <div class="faq-item">
           <button class="faq-q" type="button">
-            Это анархия или RP-сервер?
+            <span data-i18n="faq2_q">Где купить донат привилегии?</span>
             <span class="sign">+</span>
           </button>
           <div class="faq-a">
-            <p>Olymp World — это анархия с кастомными предметами (шокер, слизевая волна и другое оружие). Никаких заданных ролей и сценариев — только выживание, PvP и постройки в японской эстетике.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" type="button">
-            Донат даёт преимущество в бою?
-            <span class="sign">+</span>
-          </button>
-          <div class="faq-a">
-            <p>Нет. Донат-ранги дают косметику, титулы, точки /sethome и роли в Discord — баланс PvP не затрагивается.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" type="button">
-            Как установить шейдер?
-            <span class="sign">+</span>
-          </button>
-          <div class="faq-a">
-            <p>Скачай Complementary Unbound по кнопке в шаге 2 и закинь файл в папку shaderpacks — она появится после первого запуска Minecraft с OptiFine или Iris.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" type="button">
-            Где следить за новостями сервера?
-            <span class="sign">+</span>
-          </button>
-          <div class="faq-a">
-            <p>Все новости, вайпы и объявления публикуются в нашем Discord — <span class="mono">dsc.gg/olymp-world</span>.</p>
+            <p data-i18n="faq2_a">Привилегии можно приобрести в разделе «Донат» на этом сайте. После регистрации и оплаты ранг выдается автоматически.</p>
           </div>
         </div>
       </div>
@@ -1178,10 +1103,10 @@
 
   <div class="cta-band">
     <div>
-      <h3>Готов присоединиться?</h3>
-      <p>Сервер онлайн всегда. Тебя уже ждут на сервере!</p>
+      <h3 data-i18n="cta_title">Готовы присоединиться?</h3>
+      <p data-i18n="cta_sub">Сервер работает 24/7. Ждем вас в мире Олимпа!</p>
     </div>
-    <a href="#" class="btn btn-primary" id="joinBtn">Присоединиться сейчас</a>
+    <a href="#steps" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
   </div>
 
 </main>
@@ -1193,98 +1118,257 @@
       OLYMP WORLD
     </div>
     <div class="footer-links">
-      <a href="#home">Главная</a>
-      <a href="#steps">Как начать</a>
-      <a href="#features">Особенности</a>
-      <a href="#faq">FAQ</a>
-      <a href="#">Правила</a>
+      <a href="#home" data-i18n="nav_home">Главная</a>
+      <a href="#steps" data-i18n="nav_steps">Как начать</a>
+      <a href="#features" data-i18n="nav_features">Особенности</a>
+      <a href="#auth" data-i18n="nav_auth">Регистрация</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
       <a href="https://dsc.gg/olymp-world" target="_blank" rel="noopener">Discord</a>
-      <a href="https://www.tiktok.com/@olymp92" target="_blank" rel="noopener">TikTok</a>
-      <a href="https://www.youtube.com/@Olymp_World" target="_blank" rel="noopener">YouTube</a>
     </div>
     <div class="footer-copy">© 2026 OLYMP WORLD · MINECRAFT 1.20.6</div>
   </div>
 </footer>
 
-<div class="modal-overlay" id="payModal">
-  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="payModalTitle">
-    <button class="modal-close" id="payModalClose" type="button" aria-label="Закрыть">✕</button>
-    <div class="modal-eyebrow" id="payEyebrow">ОПЛАТА · ОПЛАТА ЧЕРЕЗ ПРИВАТ24</div>
-    <h3 id="payModalTitle">Оформление доната</h3>
-    <div class="modal-price"><span id="payRankPrice">0</span> грн</div>
-
-    <div class="modal-field">
-      <label for="payNick">Твой никнейм в игре (Minecraft)</label>
-      <input type="text" id="payNick" placeholder="Например, Steve_92">
-    </div>
-    <div class="modal-field">
-      <label for="payContact">Discord или email для связи</label>
-      <input type="text" id="payContact" placeholder="Например, nickname#0000">
-    </div>
-    <p class="modal-error" id="payError">Укажи хотя бы никнейм в игре, чтобы мы знали, кому зачислить донат.</p>
-
-    <div class="modal-card-row">
-      <span class="card-num" id="payCardNum">5168 7521 2211 4286</span>
-      <button type="button" id="payCopyCard">Копировать</button>
-    </div>
-
-    <p class="modal-hint" id="payHint">Перевод в приложении Приват24: раздел <b>«Платежи» → «Пополнить карту»</b>, вставь номер карты выше и сумму <b id="payHintPrice">0</b> грн. В назначении платежа укажи свой никнейм — так быстрее найдём оплату.</p>
-
-    <a href="https://dsc.gg/olymp-world" target="_blank" rel="noopener" class="btn btn-primary" id="payConfirm">Я оплатил — сообщить в Discord</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="liqpayModal">
-  <div class="modal-box" role="dialog" aria-modal="true">
-    <button class="modal-close" id="liqpayModalClose" type="button" aria-label="Закрыть">✕</button>
-    <div class="modal-eyebrow">ОПЛАТА · LIQPAY</div>
-    <h3>Оплата картой</h3>
-    <div id="liqpayEmbed"></div>
-  </div>
-</div>
-
 <script>
-  // mobile nav toggle
+  const translations = {
+    ru: {
+      nav_home: "Главная",
+      nav_steps: "Как начать",
+      nav_features: "Особенности",
+      nav_auth: "Регистрация",
+      nav_faq: "FAQ",
+      nav_donate: "Донат",
+      status_online: "Сервер онлайн",
+      hero_eyebrow: "御 山 の 世 界 · Season One",
+      hero_sub: "Выживание в стиле Японии: анархия с кастомными предметами и уникальными рангами.",
+      btn_start: "Почати грати",
+      ip_label: "IP сервера",
+      btn_copy: "Копировать",
+      btn_copied: "Скопировано!",
+      ver_edition: "Java Edition",
+      ver_text: "версия",
+      ver_online: "онлайн",
+      steps_title: "Как начать играть",
+      steps_sub: "Три шага — и через три минуты ты уже на сервере.",
+      step1_label: "ШАГ 1",
+      step1_title: "Minecraft Java",
+      step1_desc: "Для игры на Olymp World нужна лицензионная версия Minecraft Java Edition 1.20.6",
+      step2_label: "ШАГ 2",
+      step2_title: "Ресурспаки и шейдеры",
+      step2_desc: "Ресурспак на сервере есть автоматически, а если хочешь скачать шейдер — лучший вариант Complementary Unbound.",
+      btn_shader: "Скачать шейдер",
+      step3_label: "ШАГ 3",
+      step3_title: "Присоединение",
+      step3_desc: "Запусти Minecraft, нажми «Мультиплеер» → «Добавить сервер» и вставь IP <b>olympworld.fun</b>. Готово — добро пожаловать в мир Олимпа!",
+      features_title: "Особенности сервера",
+      features_sub: "Сервер построен вокруг эстетики классической Японии с уникальными механиками.",
+      feat1_title: "Шокер",
+      feat1_desc: "Кастомный инструмент, наносящий урон без отбрасывания врага.",
+      feat2_title: "Слизевая волна",
+      feat2_desc: "Прилепляет противников к полу на короткое время.",
+      feat3_title: "Кастомное оружие",
+      feat3_desc: "Уникальные катаны и снаряжение.",
+      feat4_title: "Дизайн и постройки",
+      feat4_desc: "Каждое здание создано с особой атмосферой.",
+      auth_section_title: "Регистрация и личный кабинет",
+      auth_section_sub: "Зарегистрируйте аккаунт, чтобы управлять игровыми данными, токенами и статистикой.",
+      reg_title: "Создать игровой аккаунт",
+      reg_desc: "Введите данные для привязки вашего персонажа к сайту проекта.",
+      label_login: "Логин на сайте",
+      label_server_login: "Логин (ник) на сервере",
+      label_email: "Email",
+      label_site_pass: "Придумайте пароль для сайта",
+      label_server_pass: "Пароль от аккаунта на сервере",
+      btn_register: "Зарегистрироваться",
+      btn_logout: "Выйти",
+      stat_tokens: "Баланс токенов",
+      stat_rank: "Ранг на сервере",
+      stat_kills: "Убийств",
+      stat_deaths: "Смертей",
+      profile_notice: "Акаунт успешно синхронизирован с иглавым сервером 1.20.6.",
+      error_fields: "Заполните все обязательные поля формы!",
+      donate_title: "Игровые привилегии",
+      donate_sub: "Выберите желаемый ранг и переходите к оплате на защищенную платформу.",
+      widget_title: "Магазин рангов",
+      widget_desc: "Поддержите развитие проекта и получите эксклюзивные команды, титулы и статус в чате.",
+      label_privileges: "Доступные привилегии",
+      badge_popular: "Популярный",
+      btn_donate_small: "Донат",
+      currency_uah: "грн",
+      p_ashigaru_title: "Ашигару",
+      p_ashigaru_f1: "Одна точка /sethome",
+      p_ashigaru_f2: "Значок в чате",
+      p_ashigaru_f3: "Доступ /kit Ашигару",
+      p_ronin_title: "Ронин",
+      p_ronin_f1: "Две точки /sethome",
+      p_ronin_f2: "Цветной ник в чате",
+      p_ronin_f3: "Титул \"Ронин\"",
+      p_ronin_f4: "Доступ /kit Ронина",
+      p_ronin_f5: "Роль в Discord",
+      p_samurai_title: "Самурай",
+      p_samurai_f1: "Всё с ранга «Ронин»",
+      p_samurai_f2: "Доступ /kit Самурай",
+      p_samurai_f3: "Титул \"Самурай\"",
+      p_samurai_f4: "Роль в Discord",
+      faq_title: "Часто задаваемые вопросы",
+      faq_sub: "Не нашли ответ — спрашивайте в нашем Discord.",
+      faq1_q: "Как зайти на сервер?",
+      faq1_a: "Скопируйте IP адрес olympworld.fun в главном меню игры (Мультиплеер -> Добавить сервер) и подключайтесь. Версия клиента должна быть 1.20.6.",
+      faq2_q: "Где купить донат привилегии?",
+      faq2_a: "Привилегии можно приобрести в разделе «Донат» на этом сайте. После регистрации и оплаты ранг выдается автоматически.",
+      cta_title: "Готовы присоединиться?",
+      cta_sub: "Сервер работает 24/7. Ждем вас в мире Олимпа!"
+    },
+    ua: {
+      nav_home: "Головна",
+      nav_steps: "Як почати",
+      nav_features: "Особливості",
+      nav_auth: "Реєстрація",
+      nav_faq: "FAQ",
+      nav_donate: "Донат",
+      status_online: "Сервер онлайн",
+      hero_eyebrow: "御 山 の 世 界 · Season One",
+      hero_sub: "Виживання в стилі Японії: анархія з кастомними предметами та унікальними рангами.",
+      btn_start: "Почати грати",
+      ip_label: "IP сервера",
+      btn_copy: "Копіювати",
+      btn_copied: "Скопійовано!",
+      ver_edition: "Java Edition",
+      ver_text: "версія",
+      ver_online: "онлайн",
+      steps_title: "Як почати грати",
+      steps_sub: "Три кроки — і за три хвилини ти вже на сервері.",
+      step1_label: "КРОК 1",
+      step1_title: "Minecraft Java",
+      step1_desc: "Для гри на Olymp World потрібна ліцензійна версія Minecraft Java Edition 1.20.6",
+      step2_label: "КРОК 2",
+      step2_title: "Ресурспаки та шейдери",
+      step2_desc: "Ресурспак на сервері є автоматично, а якщо хочеш завантажити шейдер — найкращий варіант Complementary Unbound.",
+      btn_shader: "Завантажити шейдер",
+      step3_label: "КРОК 3",
+      step3_title: "Приєднання",
+      step3_desc: "Запусти Minecraft, натисни «Мультиплеєр» → «Додати сервер» та встав IP <b>olympworld.fun</b>. Готово — ласкаво просимо у світ Олимпа!",
+      features_title: "Особливості сервера",
+      features_sub: "Сервер побудований навколо естетики класичної Японії з унікальними механіками.",
+      feat1_title: "Шокер",
+      feat1_desc: "Кастомний інструмент, що завдає шкоди без відкидання ворога.",
+      feat2_title: "Слизева хвиля",
+      feat2_desc: "Приліплює супротивників до підлоги на короткий час.",
+      feat3_title: "Кастомна зброя",
+      feat3_desc: "Унікальні катани та спорядження.",
+      feat4_title: "Дизайн і будівлі",
+      feat4_desc: "Кожна будівля створена з особливою атмосферою.",
+      auth_section_title: "Реєстрація та особистий кабінет",
+      auth_section_sub: "Зареєструйте акаунт, щоб керувати ігровими даними, токенами та статистикою.",
+      reg_title: "Створити ігровий акаунт",
+      reg_desc: "Введіть дані для прив'язки вашого персонажа до сайту проєкту.",
+      label_login: "Логін на сайті",
+      label_server_login: "Логін (нік) на сервері",
+      label_email: "Email",
+      label_site_pass: "Придумайте пароль для сайту",
+      label_server_pass: "Пароль від акаунта на сервері",
+      btn_register: "Зареєструватися",
+      btn_logout: "Вийти",
+      stat_tokens: "Баланс токенів",
+      stat_rank: "Ранг на сервері",
+      stat_kills: "Вбивств",
+      stat_deaths: "Смертей",
+      profile_notice: "Акаунт успішно синхронізовано з ігровим сервером 1.20.6.",
+      error_fields: "Заповніть усі обов'язкові поля форми!",
+      donate_title: "Ігрові привілеї",
+      donate_sub: "Виберіть бажаний ранг та переходьте до оплати на захищеній платформі.",
+      widget_title: "Магазин рангів",
+      widget_desc: "Підтримайте розвиток проєкту та отримайте ексклюзивні команди, титули і статус у чаті.",
+      label_privileges: "Доступні привілеї",
+      badge_popular: "Популярний",
+      btn_donate_small: "Донат",
+      currency_uah: "грн",
+      p_ashigaru_title: "Ашигару",
+      p_ashigaru_f1: "Одна точка /sethome",
+      p_ashigaru_f2: "Значок у чаті",
+      p_ashigaru_f3: "Доступ /kit Ашигару",
+      p_ronin_title: "Ронін",
+      p_ronin_f1: "Дві точки /sethome",
+      p_ronin_f2: "Кольоровий нік у чаті",
+      p_ronin_f3: "Титул \"Ронін\"",
+      p_ronin_f4: "Доступ /kit Роніна",
+      p_ronin_f5: "Роль у Discord",
+      p_samurai_title: "Самурай",
+      p_samurai_f1: "Все з рангу «Ронін»",
+      p_samurai_f2: "Доступ /kit Самурай",
+      p_samurai_f3: "Титул \"Самурай\"",
+      p_samurai_f4: "Роль у Discord",
+      faq_title: "Часті запитання",
+      faq_sub: "Не знайшли відповідь — запитуйте в нашому Discord.",
+      faq1_q: "Як зайти на сервер?",
+      faq1_a: "Скопіюйте IP адресу olympworld.fun в головному меню игры (Мультиплеєр -> Додати сервер) та підключайтеся. Версія клієнта має бути 1.20.6.",
+      faq2_q: "Де купити донат привілеї?",
+      faq2_a: "Привілеї можна придбати в розділі «Донат» на цьому сайті. Після реєстрації та оплати ранг видається автоматично.",
+      cta_title: "Готові приєднатися?",
+      cta_sub: "Сервер працює 24/7. Чекаємо на вас у світі Олимпа!"
+    }
+  };
+
+  let currentLang = 'ru';
+  const langBtn = document.getElementById('langBtn');
+  const langOptions = langBtn.querySelectorAll('.lang-option');
+
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'ru' ? 'ua' : 'ru';
+    langOptions.forEach(opt => {
+      if (opt.getAttribute('data-lang') === currentLang) {
+        opt.classList.add('active');
+      } else {
+        opt.classList.remove('active');
+      }
+    });
+    updateLanguage();
+  });
+
+  function updateLanguage() {
+    const dict = translations[currentLang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) {
+        el.innerHTML = dict[key];
+      }
+    });
+  }
+
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-  // copy IP
   const copyBtn = document.getElementById('copyBtn');
   const ipText = document.getElementById('ipText').textContent.trim();
   copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(ipText).then(() => {
       const original = copyBtn.textContent;
-      copyBtn.textContent = 'Скопировано!';
-      setTimeout(() => copyBtn.textContent = original, 1800);
+      copyBtn.textContent = translations[currentLang].btn_copied;
+      setTimeout(() => copyBtn.textContent = translations[currentLang].btn_copy, 1800);
     });
   });
 
-  // falling sakura petals (respects reduced motion via CSS display:none)
   const petalsContainer = document.getElementById('petals');
-  const petalCount = window.innerWidth < 700 ? 8 : 16;
-  for(let i = 0; i < petalCount; i++){
+  for(let i = 0; i < 14; i++){
     const p = document.createElement('div');
     p.className = 'petal';
     p.style.left = Math.random() * 100 + '%';
     p.style.animationDuration = (10 + Math.random() * 10) + 's';
     p.style.animationDelay = (Math.random() * 12) + 's';
     p.style.opacity = 0.3 + Math.random() * 0.4;
-    p.style.transform = `scale(${0.6 + Math.random() * 0.8})`;
     petalsContainer.appendChild(p);
   }
 
-  // FAQ accordion
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
+  document.querySelectorAll('.faq-item').forEach(item => {
     const q = item.querySelector('.faq-q');
     const a = item.querySelector('.faq-a');
     q.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-      faqItems.forEach(other => {
-        other.classList.remove('open');
-        other.querySelector('.faq-a').style.maxHeight = null;
+      document.querySelectorAll('.faq-item').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
       });
       if(!isOpen){
         item.classList.add('open');
@@ -1293,206 +1377,67 @@
     });
   });
 
-  // ---------- payment modal (Mono / Privat24) ----------
-  const payModal = document.getElementById('payModal');
-  const payModalClose = document.getElementById('payModalClose');
-  const payEyebrow = document.getElementById('payEyebrow');
-  const payRankPrice = document.getElementById('payRankPrice');
-  const payHint = document.getElementById('payHint');
-  const payHintPrice = document.getElementById('payHintPrice');
-  const payNick = document.getElementById('payNick');
-  const payContact = document.getElementById('payContact');
-  const payError = document.getElementById('payError');
-  const payCopyCard = document.getElementById('payCopyCard');
-  const payConfirm = document.getElementById('payConfirm');
-  const cardNumber = '5168752122114286';
+  // Логіка реєстрації та кабінету
+  const regForm = document.getElementById('regForm');
+  const registerFormView = document.getElementById('registerFormView');
+  const profilePanelView = document.getElementById('profilePanelView');
+  const authError = document.getElementById('authError');
+  const logoutBtn = document.getElementById('logoutBtn');
 
-  const methodText = {
-    mono: {
-      eyebrow: 'ОПЛАТА · ОПЛАТА ЧЕРЕЗ MONOBANK',
-      hintStart: 'Перевод в приложении Monobank: раздел <b>«Платежи» → «По реквизитам»</b>, вставь номер карты выше и сумму '
-    },
-    privat: {
-      eyebrow: 'ОПЛАТА · ОПЛАТА ЧЕРЕЗ ПРИВАТ24',
-      hintStart: 'Перевод в приложении Приват24: раздел <b>«Платежи» → «Пополнить карту»</b>, вставь номер карты выше и сумму '
-    }
-  };
+  const profileUsername = document.getElementById('profileUsername');
+  const profileServerLoginInfo = document.getElementById('profileServerLoginInfo');
+  const profileTokens = document.getElementById('profileTokens');
+  const profileRank = document.getElementById('profileRank');
 
-  function openPayModal(nick, price, method){
-    const m = methodText[method] || methodText.privat;
-    payEyebrow.textContent = m.eyebrow;
-    payRankPrice.textContent = price;
-    payHint.innerHTML = m.hintStart + '<b id="payHintPrice">' + price + '</b> грн. В назначении платежа укажи свой никнейм — так быстрее найдём оплату.';
-    payNick.value = nick || '';
-    payContact.value = '';
-    payError.classList.remove('show');
-    payModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => payNick.focus(), 50);
-  }
-  function closePayModal(){
-    payModal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  regForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const login = document.getElementById('regLogin').value.trim();
+    const serverLogin = document.getElementById('regServerLogin').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const sitePass = document.getElementById('regSitePass').value.trim();
+    const serverPass = document.getElementById('regServerPass').value.trim();
 
-  payModalClose.addEventListener('click', closePayModal);
-  payModal.addEventListener('click', (e) => {
-    if(e.target === payModal) closePayModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && payModal.classList.contains('open')) closePayModal();
-  });
-
-  payCopyCard.addEventListener('click', () => {
-    navigator.clipboard.writeText(cardNumber).then(() => {
-      const original = payCopyCard.textContent;
-      payCopyCard.textContent = 'Скопировано!';
-      setTimeout(() => payCopyCard.textContent = original, 1600);
-    });
-  });
-
-  payConfirm.addEventListener('click', (e) => {
-    if(!payNick.value.trim()){
-      e.preventDefault();
-      payError.classList.add('show');
-      payNick.focus();
-    }
-  });
-
-  // ---------- LiqPay: моментальна оплата карткою (опційно) ----------
-  // Щоб УВІМКНУТИ реальну оплату карткою (LiqPay сам приймає і Mono, і Приват, і будь-яку іншу картку):
-  //   1) Зареєструй акаунт на liqpay.ua, отримай public_key і private_key в кабінеті
-  //   2) Задеплой файл liqpay-sign-worker.js (окремо, я його теж підготував) на Cloudflare Workers —
-  //      це безкоштовний сервер на 2 хвилини, він підписує платіж, не розкриваючи private_key браузеру
-  //   3) Встав нижче свій public_key і адресу воркера
-  // Поки поля порожні — сайт чесно показує ручний переказ на картку (як зараз), без фейкового "оплачено".
-  const LIQPAY_PUBLIC_KEY = '';       // напр. 'i00000000'
-  const LIQPAY_SIGN_ENDPOINT = '';    // напр. 'https://olymp-liqpay.твій-акаунт.workers.dev'
-
-  const liqpayModal = document.getElementById('liqpayModal');
-  const liqpayModalClose = document.getElementById('liqpayModalClose');
-  const liqpayEmbed = document.getElementById('liqpayEmbed');
-
-  function closeLiqpayModal(){
-    liqpayModal.classList.remove('open');
-    document.body.style.overflow = '';
-    liqpayEmbed.innerHTML = '';
-  }
-  liqpayModalClose.addEventListener('click', closeLiqpayModal);
-  liqpayModal.addEventListener('click', (e) => { if(e.target === liqpayModal) closeLiqpayModal(); });
-
-  function loadLiqPayScript(){
-    if(window.LiqPayCheckout) return Promise.resolve();
-    return new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.src = 'https://static.liqpay.ua/libjs/checkout.js';
-      s.onload = resolve;
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
-
-  // Повертає true, якщо вдалось відкрити справжню оплату LiqPay; false — якщо не налаштовано або сталась помилка
-  async function tryLiqPayCheckout(amount, nick){
-    if(!LIQPAY_PUBLIC_KEY || !LIQPAY_SIGN_ENDPOINT) return false;
-    try{
-      const res = await fetch(LIQPAY_SIGN_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount, nick })
-      });
-      if(!res.ok) throw new Error('sign endpoint responded with ' + res.status);
-      const { data, signature } = await res.json();
-
-      await loadLiqPayScript();
-
-      liqpayEmbed.innerHTML = '';
-      liqpayModal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-
-      window.LiqPayCheckout.init({
-        data, signature,
-        embedTo: '#liqpayEmbed',
-        mode: 'embed'
-      }).on('liqpay.callback', (cbData) => {
-        if(cbData.status === 'success' || cbData.status === 'sandbox'){
-          closeLiqpayModal();
-          alert('Оплата прошла успешно! Донат зачислится в течение минуты.');
-        }
-      });
-
-      return true;
-    }catch(err){
-      console.warn('LiqPay не настроен или недоступен — показываю ручной перевод.', err);
-      return false;
-    }
-  }
-
-  // ---------- donate widget (amount + login + method) ----------
-  const donateAmount = document.getElementById('donateAmount');
-  const coinAmount = document.getElementById('coinAmount');
-  const donateLogin = document.getElementById('donateLogin');
-  const donateTerms = document.getElementById('donateTerms');
-  const donateError = document.getElementById('donateError');
-  const donateContinue = document.getElementById('donateContinue');
-  const bonusButtons = document.querySelectorAll('.bonus-btn');
-  const methodTiles = document.querySelectorAll('.method-tile');
-  let selectedMethod = null;
-
-  function updateCoinPreview(){
-    const amt = parseFloat(donateAmount.value) || 0;
-    coinAmount.textContent = Math.floor(amt * 2);
-  }
-  donateAmount.addEventListener('input', () => {
-    updateCoinPreview();
-    bonusButtons.forEach(b => b.classList.remove('active'));
-  });
-
-  bonusButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      donateAmount.value = btn.dataset.amount;
-      updateCoinPreview();
-      bonusButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-
-  methodTiles.forEach(tile => {
-    tile.addEventListener('click', () => {
-      methodTiles.forEach(t => t.classList.remove('selected'));
-      tile.classList.add('selected');
-      selectedMethod = tile.dataset.method;
-    });
-  });
-
-  donateContinue.addEventListener('click', async () => {
-    const amt = parseFloat(donateAmount.value) || 0;
-    const login = donateLogin.value.trim();
-    if(amt <= 0 || !login || !selectedMethod || !donateTerms.checked){
-      donateError.classList.add('show');
+    if(!login || !serverLogin || !email || !sitePass || !serverPass) {
+      authError.classList.add('show');
       return;
     }
-    donateError.classList.remove('show');
+    authError.classList.remove('show');
 
-    const openedLiqPay = await tryLiqPayCheckout(amt, login);
-    if(!openedLiqPay){
-      openPayModal(login, amt, selectedMethod);
-    }
+    // Зберігаємо дані у sessionStorage та перемикаємо на кабінет
+    sessionStorage.setItem('olymp_user', login);
+    sessionStorage.setItem('olymp_server_login', serverLogin);
+
+    profileUsername.textContent = login;
+    profileServerLoginInfo.textContent = "Нік на сервері: " + serverLogin;
+    profileTokens.textContent = "250 🪙";
+    profileRank.textContent = "Ашигару";
+
+    registerFormView.style.display = 'none';
+    profilePanelView.classList.add('active');
   });
 
-  // CTA band "join now" button — scroll to hero and copy IP
-  const joinBtn = document.getElementById('joinBtn');
-  if(joinBtn){
-    joinBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-      navigator.clipboard.writeText(ipText).then(() => {
-        const original = joinBtn.textContent;
-        joinBtn.textContent = 'IP скопировано!';
-        setTimeout(() => joinBtn.textContent = original, 1800);
-      });
-    });
-  }
+  logoutBtn.addEventListener('click', () => {
+    sessionStorage.removeItem('olymp_user');
+    sessionStorage.removeItem('olymp_server_login');
+    regForm.reset();
+    profilePanelView.classList.remove('active');
+    registerFormView.style.display = 'block';
+  });
+
+  // Перевірка при завантаженні сторінки
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedUser = sessionStorage.getItem('olymp_user');
+    const savedServerLogin = sessionStorage.getItem('olymp_server_login');
+    if(savedUser){
+      profileUsername.textContent = savedUser;
+      profileServerLoginInfo.textContent = "Нік на сервері: " + (savedServerLogin || "-");
+      profileTokens.textContent = "250 🪙";
+      profileRank.textContent = "Ашигару";
+
+      registerFormView.style.display = 'none';
+      profilePanelView.classList.add('active');
+    }
+  });
 </script>
 
 </body>
