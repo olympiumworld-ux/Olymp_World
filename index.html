@@ -505,6 +505,13 @@
   }
   .auth-error.show{ display: block; }
 
+  .auth-privacy-note{
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 14px 0 0;
+    line-height: 1.5;
+  }
+
   /* Кабінет гравця */
   .profile-panel{
     display: none;
@@ -550,7 +557,7 @@
   /* Блок донату */
   .donate{ padding: 20px 32px 120px; }
   .donate-widget{
-    max-width: 920px;
+    max-width: 980px;
     margin: 0 auto;
     background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
     border: 1px solid rgba(255,122,41,0.3);
@@ -566,7 +573,7 @@
   }
   .privilege-grid{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 14px;
   }
   .priv-card{
@@ -582,6 +589,7 @@
     justify-content: space-between;
   }
   .priv-card:hover{ border-color: rgba(255,122,41,0.4); }
+  .priv-card.top{ border-color: rgba(242,183,5,0.45); background: rgba(242,183,5,0.06); }
   .priv-popular{
     position: absolute;
     top: -10px; right: 16px;
@@ -594,6 +602,7 @@
     border-radius: 999px;
     text-transform: uppercase;
   }
+  .priv-popular.gold{ background: linear-gradient(135deg, #ffe27a, var(--gold)); }
   .priv-header{ margin-bottom: 14px; }
   .priv-title{ font-size: 20px; font-weight: 700; font-family: 'Shippori Mincho', serif; margin-bottom: 4px; display: block; }
   .priv-price{ font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--orange); }
@@ -622,10 +631,26 @@
     text-align: center;
     transition: opacity 0.2s ease, transform 0.15s ease;
     box-shadow: 0 4px 12px rgba(255,122,41,0.25);
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
     text-decoration: none;
   }
   .priv-pay-btn:hover{ opacity: 0.9; transform: translateY(-1px); }
+  .donatik-icon{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #a78bfa, #7c3aed);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
 
   .faq{ padding: 20px 32px 120px; }
   .faq-list{
@@ -700,6 +725,131 @@
   .cta-band .btn-primary{ background: #170e07; color: var(--gold); box-shadow: none; }
   .cta-band .btn-primary:hover{ background: #241609; }
 
+  /* ---------- category strip ---------- */
+  .category-strip{ padding: 10px 32px 90px; }
+  .category-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .category-card{
+    background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.25s ease;
+  }
+  .category-card:hover{
+    border-color: rgba(255,122,41,0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(255,122,41,0.12);
+  }
+  .category-icon{
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: rgba(255,122,41,0.12);
+    border: 1px solid rgba(255,122,41,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .category-text{ display: flex; flex-direction: column; gap: 2px; }
+  .category-title{ font-weight: 700; font-size: 15.5px; color: var(--text); }
+  .category-sub{ font-size: 12.5px; color: var(--text-muted); }
+
+  /* ---------- online widget (right strip) ---------- */
+  .online-widget{
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    width: 190px;
+    background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border: 1px solid rgba(255,122,41,0.3);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+  }
+  .online-widget-head{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .online-widget-dot{
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #6b6459;
+    flex-shrink: 0;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .online-widget-dot.on{ background: #4ade80; box-shadow: 0 0 8px #4ade80; animation: pulse 1.8s ease-in-out infinite; }
+  .online-widget-dot.off{ background: #ff5a5a; box-shadow: 0 0 8px #ff5a5a; }
+  .online-widget-count{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .online-widget-label{ font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px; }
+  .online-widget-players{
+    list-style: none;
+    margin: 0;
+    padding: 10px 0 0;
+    border-top: 1px solid var(--line);
+    max-height: 140px;
+    overflow-y: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .online-widget-players li{ padding: 3px 0; }
+  @media (max-width: 1150px){
+    .online-widget{ display: none; }
+  }
+
+  /* ---------- back to top ---------- */
+  .to-top-btn{
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    z-index: 40;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,122,41,0.4);
+    background: var(--bg-panel);
+    color: var(--orange);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow);
+  }
+  .to-top-btn.show{ opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .to-top-btn:hover{ background: var(--orange); color: #170e07; }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{ opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible{ opacity: 1; transform: translateY(0); }
+
   footer{
     border-top: 1px solid var(--line);
     padding: 44px 32px;
@@ -719,7 +869,6 @@
   .footer-copy{ font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); opacity: 0.6; }
 
   @media (max-width: 960px){
-    .privilege-grid{ grid-template-columns: repeat(2, 1fr); }
     .profile-stats-grid{ grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 880px){
@@ -728,6 +877,7 @@
     .form-grid{ grid-template-columns: 1fr; }
     .widget-group.full{ grid-column: span 1; }
     .privilege-grid{ grid-template-columns: 1fr; }
+    .category-grid{ grid-template-columns: 1fr; }
     .status-pill{ display: none; }
     .nav-links{
       position: fixed;
@@ -775,7 +925,7 @@
     </div>
     <div class="nav-right-group">
       <span class="status-pill"><span class="status-dot"></span><span data-i18n="status_online">Сервер онлайн</span></span>
-      
+
       <button class="lang-btn" id="langBtn" type="button">
         <span class="lang-option" data-lang="ua">UA</span>
         <span class="lang-divider">/</span>
@@ -816,7 +966,7 @@
       <p class="hero-sub" data-i18n="hero_sub">Выживание в стиле Японии: анархия с кастомными предметами и уникальными рангами.</p>
 
       <div class="hero-actions">
-        <a href="#steps" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
+        <a href="#steps" class="btn btn-primary" data-i18n="btn_start">Начать играть</a>
         <a href="#auth" class="btn btn-ghost" data-i18n="nav_auth">Регистрация</a>
       </div>
 
@@ -836,6 +986,34 @@
     </div>
   </section>
 
+  <section class="category-strip">
+    <div class="wrap">
+      <div class="category-grid">
+        <a href="#steps" class="category-card">
+          <span class="category-icon">🎮</span>
+          <span class="category-text">
+            <span class="category-title" data-i18n="cat_steps_title">Как начать играть</span>
+            <span class="category-sub" data-i18n="cat_steps_sub">Гайд для новых игроков</span>
+          </span>
+        </a>
+        <a href="#auth" class="category-card">
+          <span class="category-icon">👤</span>
+          <span class="category-text">
+            <span class="category-title" data-i18n="cat_auth_title">Личный кабинет</span>
+            <span class="category-sub" data-i18n="cat_auth_sub">Регистрация и профиль</span>
+          </span>
+        </a>
+        <a href="#donate" class="category-card">
+          <span class="category-icon">💰</span>
+          <span class="category-text">
+            <span class="category-title" data-i18n="cat_donate_title">Донат и привилегии</span>
+            <span class="category-sub" data-i18n="cat_donate_sub">Магазин рангов сервера</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="steps" id="steps">
     <div class="wrap">
       <div class="section-head">
@@ -850,15 +1028,15 @@
           <div class="step-label" data-i18n="step1_label">ШАГ 1</div>
           <h3 data-i18n="step1_title">Minecraft Java</h3>
           <p data-i18n="step1_desc">Для игры на Olymp World нужна лицензионная версия Minecraft Java Edition 1.20.6</p>
-          <a href="#home" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
+          <a href="#home" class="btn btn-primary" data-i18n="btn_start">Начать играть</a>
         </div>
 
         <div class="step-card">
           <span class="step-kanji">二</span>
           <div class="step-label" data-i18n="step2_label">ШАГ 2</div>
           <h3 data-i18n="step2_title">Ресурспаки и шейдеры</h3>
-          <p data-i18n="step2_desc">Ресурспак на сервере есть автоматически, а если хочешь скачать шейдер — лучший вариант Complementary Unbound.</p>
-          <a href="https://www.curseforge.com/minecraft/shaders/complementary-unbound" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn_shader">Скачать шейдер</a>
+          <p data-i18n="step2_desc">Ресурспак на сервере есть автоматически, а если хочешь скачать шейдер — лучший вариант Bliss.</p>
+          <a href="https://olympiumworld-ux.github.io/Olymp_World/#" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn_shader">Скачать шейдер</a>
         </div>
 
         <div class="step-card">
@@ -866,7 +1044,7 @@
           <div class="step-label" data-i18n="step3_label">ШАГ 3</div>
           <h3 data-i18n="step3_title">Присоединение</h3>
           <p data-i18n="step3_desc">Запусти Minecraft, нажми «Мультиплеер» → «Добавить сервер» и вставь IP <b>olympworld.fun</b>. Готово — добро пожаловать в мир Олимпа!</p>
-          <a href="#home" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
+          <a href="#home" class="btn btn-primary" data-i18n="btn_start">Начать играть</a>
         </div>
       </div>
     </div>
@@ -915,7 +1093,7 @@
       </div>
 
       <div class="auth-widget">
-        
+
         <!-- Форма реєстрації -->
         <div id="registerFormView">
           <div class="widget-top">
@@ -964,6 +1142,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 10px;" data-i18n="btn_register">Зарегистрироваться</button>
+            <p class="auth-privacy-note" data-i18n="privacy_note">Мы запоминаем твой аккаунт в этом браузере, чтобы не вводить данные заново. Пароли нигде не сохраняются — ни на сервере, ни локально.</p>
           </form>
         </div>
 
@@ -972,7 +1151,7 @@
           <div class="profile-header-card">
             <div class="profile-user-info">
               <h4 id="profileUsername">Player</h4>
-              <span id="profileServerLoginInfo">Нік: -</span>
+              <span id="profileServerLoginInfo">—</span>
             </div>
             <button type="button" class="btn btn-ghost" id="logoutBtn" style="padding: 10px 20px; font-size: 13px;" data-i18n="btn_logout">Выйти</button>
           </div>
@@ -980,24 +1159,24 @@
           <div class="profile-stats-grid">
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_tokens">Баланс токенов</span>
-              <span class="stat-val" id="profileTokens">150 🪙</span>
+              <span class="stat-val" id="profileTokens">— 🪙</span>
             </div>
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_rank">Ранг на сервере</span>
-              <span class="stat-val" id="profileRank" style="color:var(--orange)">Ашигару</span>
+              <span class="stat-val" id="profileRank" style="color:var(--orange)">—</span>
             </div>
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_kills">Убийств</span>
-              <span class="stat-val">24</span>
+              <span class="stat-val">—</span>
             </div>
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_deaths">Смертей</span>
-              <span class="stat-val">12</span>
+              <span class="stat-val">—</span>
             </div>
           </div>
 
           <div style="text-align: center; color: var(--text-muted); font-size: 13.5px;" data-i18n="profile_notice">
-            Акаунт успішно синхронізовано з ігровим сервером 1.20.6. Ви можете купувати донат нижче.
+            Аккаунт запомнен в этом браузере. Токены, ранг и статистика — демо-значения до подключения игрового бекенда.
           </div>
         </div>
 
@@ -1032,7 +1211,7 @@
               <li data-i18n="p_ashigaru_f2">Значок в чате</li>
               <li data-i18n="p_ashigaru_f3">Доступ /kit Ашигару</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn" data-i18n="btn_donate_small">Донат</a>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
           </div>
 
           <div class="priv-card">
@@ -1047,7 +1226,7 @@
               <li data-i18n="p_ronin_f4">Доступ /kit Ронина</li>
               <li data-i18n="p_ronin_f5">Роль в Discord</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn" data-i18n="btn_donate_small">Донат</a>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
           </div>
 
           <div class="priv-card">
@@ -1062,7 +1241,36 @@
               <li data-i18n="p_samurai_f3">Титул "Самурай"</li>
               <li data-i18n="p_samurai_f4">Роль в Discord</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn" data-i18n="btn_donate_small">Донат</a>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+          </div>
+
+          <div class="priv-card">
+            <div class="priv-header">
+              <span class="priv-title" data-i18n="p_shogun_title">Сёгун</span>
+              <div class="priv-price">499 <small data-i18n="currency_uah">грн</small></div>
+            </div>
+            <ul class="priv-features">
+              <li data-i18n="p_shogun_f1">Всё из ранга «Самурай»</li>
+              <li data-i18n="p_shogun_f2">Создание одного /warp</li>
+              <li data-i18n="p_shogun_f3">Эксклюзивные партиклы по желанию</li>
+            </ul>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+          </div>
+
+          <div class="priv-card top">
+            <div class="priv-popular gold" data-i18n="badge_max">Максимальный ранг</div>
+            <div class="priv-header">
+              <span class="priv-title" data-i18n="p_emperor_title">Император</span>
+              <div class="priv-price">999 <small data-i18n="currency_uah">грн</small></div>
+            </div>
+            <ul class="priv-features">
+              <li data-i18n="p_emperor_f1">Всё из ранга «Сёгун»</li>
+              <li data-i18n="p_emperor_f2">Личный /fly на своей территории</li>
+              <li data-i18n="p_emperor_f3">Приоритетная поддержка в Discord</li>
+              <li data-i18n="p_emperor_f4">Кастомный /warp с уникальным названием</li>
+              <li data-i18n="p_emperor_f5">Уникальный титул и цвет ника</li>
+            </ul>
+            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
           </div>
         </div>
 
@@ -1094,7 +1302,7 @@
             <span class="sign">+</span>
           </button>
           <div class="faq-a">
-            <p data-i18n="faq2_a">Привилегии можно приобрести в разделе «Донат» на этом сайте. После регистрации и оплаты ранг выдается автоматически.</p>
+            <p data-i18n="faq2_a">Привилегии можно приобрести в разделе «Донат» на этом сайте — оплата проходит через Donatik. После оплаты ранг выдается вручную в течение нескольких минут.</p>
           </div>
         </div>
       </div>
@@ -1106,10 +1314,22 @@
       <h3 data-i18n="cta_title">Готовы присоединиться?</h3>
       <p data-i18n="cta_sub">Сервер работает 24/7. Ждем вас в мире Олимпа!</p>
     </div>
-    <a href="#steps" class="btn btn-primary" data-i18n="btn_start">Почати грати</a>
+    <a href="#steps" class="btn btn-primary" data-i18n="btn_start">Начать играть</a>
   </div>
 
 </main>
+
+<div class="online-widget" id="onlineWidget">
+  <div class="online-widget-head">
+    <span class="online-widget-dot" id="onlineDot"></span>
+    <span data-i18n="online_label">Сервер</span>
+  </div>
+  <div class="online-widget-count" id="onlineCount">—</div>
+  <div class="online-widget-label" id="onlineStatusText" data-i18n="online_loading">Проверяем статус…</div>
+  <ul class="online-widget-players" id="onlinePlayers"></ul>
+</div>
+
+<button class="to-top-btn" id="toTopBtn" type="button" aria-label="Наверх">↑</button>
 
 <footer>
   <div class="footer-inner">
@@ -1139,9 +1359,20 @@
       nav_faq: "FAQ",
       nav_donate: "Донат",
       status_online: "Сервер онлайн",
+      cat_steps_title: "Как начать играть",
+      cat_steps_sub: "Гайд для новых игроков",
+      cat_auth_title: "Личный кабинет",
+      cat_auth_sub: "Регистрация и профиль",
+      cat_donate_title: "Донат и привилегии",
+      cat_donate_sub: "Магазин рангов сервера",
+      online_label: "Сервер",
+      online_loading: "Проверяем статус…",
+      online_players_label: "игроков онлайн",
+      online_offline: "Сервер сейчас offline",
+      online_error: "Не удалось получить статус",
       hero_eyebrow: "御 山 の 世 界 · Season One",
       hero_sub: "Выживание в стиле Японии: анархия с кастомными предметами и уникальными рангами.",
-      btn_start: "Почати грати",
+      btn_start: "Начать играть",
       ip_label: "IP сервера",
       btn_copy: "Копировать",
       btn_copied: "Скопировано!",
@@ -1155,7 +1386,7 @@
       step1_desc: "Для игры на Olymp World нужна лицензионная версия Minecraft Java Edition 1.20.6",
       step2_label: "ШАГ 2",
       step2_title: "Ресурспаки и шейдеры",
-      step2_desc: "Ресурспак на сервере есть автоматически, а если хочешь скачать шейдер — лучший вариант Complementary Unbound.",
+      step2_desc: "Ресурспак на сервере есть автоматически, а если хочешь скачать шейдер — лучший вариант Bliss.",
       btn_shader: "Скачать шейдер",
       step3_label: "ШАГ 3",
       step3_title: "Присоединение",
@@ -1185,14 +1416,17 @@
       stat_rank: "Ранг на сервере",
       stat_kills: "Убийств",
       stat_deaths: "Смертей",
-      profile_notice: "Акаунт успешно синхронизирован с иглавым сервером 1.20.6.",
+      profile_notice: "Аккаунт запомнен в этом браузере. Токены, ранг и статистика — демо-значения до подключения игрового бекенда.",
       error_fields: "Заполните все обязательные поля формы!",
+      privacy_note: "Мы запоминаем твой аккаунт в этом браузере, чтобы не вводить данные заново. Пароли нигде не сохраняются — ни на сервере, ни локально.",
+      profile_server_label: "Ник на сервере:",
       donate_title: "Игровые привилегии",
       donate_sub: "Выберите желаемый ранг и переходите к оплате на защищенную платформу.",
       widget_title: "Магазин рангов",
       widget_desc: "Поддержите развитие проекта и получите эксклюзивные команды, титулы и статус в чате.",
       label_privileges: "Доступные привилегии",
       badge_popular: "Популярный",
+      badge_max: "Максимальный ранг",
       btn_donate_small: "Донат",
       currency_uah: "грн",
       p_ashigaru_title: "Ашигару",
@@ -1210,12 +1444,22 @@
       p_samurai_f2: "Доступ /kit Самурай",
       p_samurai_f3: "Титул \"Самурай\"",
       p_samurai_f4: "Роль в Discord",
+      p_shogun_title: "Сёгун",
+      p_shogun_f1: "Всё из ранга «Самурай»",
+      p_shogun_f2: "Создание одного /warp",
+      p_shogun_f3: "Эксклюзивные партиклы по желанию",
+      p_emperor_title: "Император",
+      p_emperor_f1: "Всё из ранга «Сёгун»",
+      p_emperor_f2: "Личный /fly на своей территории",
+      p_emperor_f3: "Приоритетная поддержка в Discord",
+      p_emperor_f4: "Кастомный /warp с уникальным названием",
+      p_emperor_f5: "Уникальный титул и цвет ника",
       faq_title: "Часто задаваемые вопросы",
       faq_sub: "Не нашли ответ — спрашивайте в нашем Discord.",
       faq1_q: "Как зайти на сервер?",
       faq1_a: "Скопируйте IP адрес olympworld.fun в главном меню игры (Мультиплеер -> Добавить сервер) и подключайтесь. Версия клиента должна быть 1.20.6.",
       faq2_q: "Где купить донат привилегии?",
-      faq2_a: "Привилегии можно приобрести в разделе «Донат» на этом сайте. После регистрации и оплаты ранг выдается автоматически.",
+      faq2_a: "Привилегии можно приобрести в разделе «Донат» на этом сайте — оплата проходит через Donatik. После оплаты ранг выдается вручную в течение нескольких минут.",
       cta_title: "Готовы присоединиться?",
       cta_sub: "Сервер работает 24/7. Ждем вас в мире Олимпа!"
     },
@@ -1227,6 +1471,17 @@
       nav_faq: "FAQ",
       nav_donate: "Донат",
       status_online: "Сервер онлайн",
+      cat_steps_title: "Як почати грати",
+      cat_steps_sub: "Гайд для нових гравців",
+      cat_auth_title: "Особистий кабінет",
+      cat_auth_sub: "Реєстрація і профіль",
+      cat_donate_title: "Донат і привілеї",
+      cat_donate_sub: "Магазин рангів сервера",
+      online_label: "Сервер",
+      online_loading: "Перевіряємо статус…",
+      online_players_label: "гравців онлайн",
+      online_offline: "Сервер зараз offline",
+      online_error: "Не вдалося отримати статус",
       hero_eyebrow: "御 山 の 世 界 · Season One",
       hero_sub: "Виживання в стилі Японії: анархія з кастомними предметами та унікальними рангами.",
       btn_start: "Почати грати",
@@ -1243,11 +1498,11 @@
       step1_desc: "Для гри на Olymp World потрібна ліцензійна версія Minecraft Java Edition 1.20.6",
       step2_label: "КРОК 2",
       step2_title: "Ресурспаки та шейдери",
-      step2_desc: "Ресурспак на сервері є автоматично, а якщо хочеш завантажити шейдер — найкращий варіант Complementary Unbound.",
+      step2_desc: "Ресурспак на сервері є автоматично, а якщо хочеш завантажити шейдер — найкращий варіант Bliss.",
       btn_shader: "Завантажити шейдер",
       step3_label: "КРОК 3",
       step3_title: "Приєднання",
-      step3_desc: "Запусти Minecraft, натисни «Мультиплеєр» → «Додати сервер» та встав IP <b>olympworld.fun</b>. Готово — ласкаво просимо у світ Олимпа!",
+      step3_desc: "Запусти Minecraft, натисни «Мультиплеєр» → «Додати сервер» та встав IP <b>olympworld.fun</b>. Готово — ласкаво просимо у світ Олімпа!",
       features_title: "Особливості сервера",
       features_sub: "Сервер побудований навколо естетики класичної Японії з унікальними механіками.",
       feat1_title: "Шокер",
@@ -1273,14 +1528,17 @@
       stat_rank: "Ранг на сервері",
       stat_kills: "Вбивств",
       stat_deaths: "Смертей",
-      profile_notice: "Акаунт успішно синхронізовано з ігровим сервером 1.20.6.",
+      profile_notice: "Акаунт запам'ятано в цьому браузері. Токени, ранг і статистика — демо-значення до підключення ігрового бекенду.",
       error_fields: "Заповніть усі обов'язкові поля форми!",
+      privacy_note: "Ми запам'ятовуємо твій акаунт у цьому браузері, щоб не вводити дані знову. Паролі ніде не зберігаються — ні на сервері, ні локально.",
+      profile_server_label: "Нік на сервері:",
       donate_title: "Ігрові привілеї",
       donate_sub: "Виберіть бажаний ранг та переходьте до оплати на захищеній платформі.",
       widget_title: "Магазин рангів",
       widget_desc: "Підтримайте розвиток проєкту та отримайте ексклюзивні команди, титули і статус у чаті.",
       label_privileges: "Доступні привілеї",
       badge_popular: "Популярний",
+      badge_max: "Максимальний ранг",
       btn_donate_small: "Донат",
       currency_uah: "грн",
       p_ashigaru_title: "Ашигару",
@@ -1298,14 +1556,24 @@
       p_samurai_f2: "Доступ /kit Самурай",
       p_samurai_f3: "Титул \"Самурай\"",
       p_samurai_f4: "Роль у Discord",
+      p_shogun_title: "Сьогун",
+      p_shogun_f1: "Все з рангу «Самурай»",
+      p_shogun_f2: "Створення одного /warp",
+      p_shogun_f3: "Ексклюзивні партикли за бажанням",
+      p_emperor_title: "Імператор",
+      p_emperor_f1: "Все з рангу «Сьогун»",
+      p_emperor_f2: "Особистий /fly на своїй території",
+      p_emperor_f3: "Пріоритетна підтримка в Discord",
+      p_emperor_f4: "Кастомний /warp з унікальною назвою",
+      p_emperor_f5: "Унікальний титул і колір ніку",
       faq_title: "Часті запитання",
       faq_sub: "Не знайшли відповідь — запитуйте в нашому Discord.",
       faq1_q: "Як зайти на сервер?",
-      faq1_a: "Скопіюйте IP адресу olympworld.fun в головному меню игры (Мультиплеєр -> Додати сервер) та підключайтеся. Версія клієнта має бути 1.20.6.",
+      faq1_a: "Скопіюйте IP адресу olympworld.fun в головному меню гри (Мультиплеєр -> Додати сервер) та підключайтеся. Версія клієнта має бути 1.20.6.",
       faq2_q: "Де купити донат привілеї?",
-      faq2_a: "Привілеї можна придбати в розділі «Донат» на цьому сайті. Після реєстрації та оплати ранг видається автоматично.",
+      faq2_a: "Привілеї можна придбати в розділі «Донат» на цьому сайті — оплата проходить через Donatik. Після оплати ранг видається вручну протягом кількох хвилин.",
       cta_title: "Готові приєднатися?",
-      cta_sub: "Сервер працює 24/7. Чекаємо на вас у світі Олимпа!"
+      cta_sub: "Сервер працює 24/7. Чекаємо на вас у світі Олімпа!"
     }
   };
 
@@ -1315,14 +1583,12 @@
 
   langBtn.addEventListener('click', () => {
     currentLang = currentLang === 'ru' ? 'ua' : 'ru';
+    document.documentElement.lang = currentLang === 'ua' ? 'uk' : 'ru';
     langOptions.forEach(opt => {
-      if (opt.getAttribute('data-lang') === currentLang) {
-        opt.classList.add('active');
-      } else {
-        opt.classList.remove('active');
-      }
+      opt.classList.toggle('active', opt.getAttribute('data-lang') === currentLang);
     });
     updateLanguage();
+    if(typeof refreshServerStatus === 'function') refreshServerStatus();
   });
 
   function updateLanguage() {
@@ -1333,6 +1599,11 @@
         el.innerHTML = dict[key];
       }
     });
+    // Профиль (если открыт) тоже пересобираем на новом языке
+    if (profilePanelView.classList.contains('active')) {
+      const serverLogin = localStorage.getItem('olymp_server_login') || '-';
+      profileServerLoginInfo.textContent = dict.profile_server_label + ' ' + serverLogin;
+    }
   }
 
   const navToggle = document.getElementById('navToggle');
@@ -1346,7 +1617,7 @@
     navigator.clipboard.writeText(ipText).then(() => {
       const original = copyBtn.textContent;
       copyBtn.textContent = translations[currentLang].btn_copied;
-      setTimeout(() => copyBtn.textContent = translations[currentLang].btn_copy, 1800);
+      setTimeout(() => copyBtn.textContent = original, 1800);
     });
   });
 
@@ -1377,7 +1648,19 @@
     });
   });
 
-  // Логіка реєстрації та кабінету
+  // ---------- Реєстрація та кабінет ----------
+  // "Запам'ятовування акаунта" реалізовано через localStorage — це РЕАЛЬНО працює
+  // і переживає закриття вкладки/браузера, на відміну від sessionStorage раніше.
+  // Обмеження, яке чесно варто знати: localStorage прив'язаний до конкретного браузера
+  // на конкретному пристрої — акаунт НЕ буде видно, якщо зайти з іншого браузера
+  // чи телефону. Повноцінний акаунт "з будь-якого пристрою" вимагає бекенду й бази
+  // даних на сервері (те саме обмеження, що і з платежами).
+  //
+  // Паролі (сайтовий і особливо серверний, від /login на майнкрафт-акаунті)
+  // НІКУДИ не зберігаються — ні в localStorage, ні деінде. Це свідоме рішення:
+  // зберігати паролі в браузері в незашифрованому вигляді небезпечно, а справжня
+  // перевірка пароля повинна відбуватись лише на сервері (плагін типу AuthMe),
+  // а не в браузері гравця.
   const regForm = document.getElementById('regForm');
   const registerFormView = document.getElementById('registerFormView');
   const profilePanelView = document.getElementById('profilePanelView');
@@ -1388,6 +1671,18 @@
   const profileServerLoginInfo = document.getElementById('profileServerLoginInfo');
   const profileTokens = document.getElementById('profileTokens');
   const profileRank = document.getElementById('profileRank');
+
+  function showProfile(login, serverLogin){
+    const dict = translations[currentLang];
+    profileUsername.textContent = login;
+    profileServerLoginInfo.textContent = dict.profile_server_label + ' ' + (serverLogin || '-');
+    // Демо-значения: реальные токены/ранг/статистику должен отдавать игровой бекенд
+    profileTokens.textContent = '250 🪙';
+    profileRank.textContent = 'Ашигару';
+
+    registerFormView.style.display = 'none';
+    profilePanelView.classList.add('active');
+  }
 
   regForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -1403,41 +1698,97 @@
     }
     authError.classList.remove('show');
 
-    // Зберігаємо дані у sessionStorage та перемикаємо на кабінет
-    sessionStorage.setItem('olymp_user', login);
-    sessionStorage.setItem('olymp_server_login', serverLogin);
+    // Сохраняем в localStorage только не чувствительные данные — без паролей
+    localStorage.setItem('olymp_user', login);
+    localStorage.setItem('olymp_server_login', serverLogin);
+    localStorage.setItem('olymp_email', email);
 
-    profileUsername.textContent = login;
-    profileServerLoginInfo.textContent = "Нік на сервері: " + serverLogin;
-    profileTokens.textContent = "250 🪙";
-    profileRank.textContent = "Ашигару";
-
-    registerFormView.style.display = 'none';
-    profilePanelView.classList.add('active');
+    showProfile(login, serverLogin);
+    regForm.reset();
   });
 
   logoutBtn.addEventListener('click', () => {
-    sessionStorage.removeItem('olymp_user');
-    sessionStorage.removeItem('olymp_server_login');
+    localStorage.removeItem('olymp_user');
+    localStorage.removeItem('olymp_server_login');
+    localStorage.removeItem('olymp_email');
     regForm.reset();
     profilePanelView.classList.remove('active');
     registerFormView.style.display = 'block';
   });
 
-  // Перевірка при завантаженні сторінки
   window.addEventListener('DOMContentLoaded', () => {
-    const savedUser = sessionStorage.getItem('olymp_user');
-    const savedServerLogin = sessionStorage.getItem('olymp_server_login');
+    updateLanguage();
+    const savedUser = localStorage.getItem('olymp_user');
+    const savedServerLogin = localStorage.getItem('olymp_server_login');
     if(savedUser){
-      profileUsername.textContent = savedUser;
-      profileServerLoginInfo.textContent = "Нік на сервері: " + (savedServerLogin || "-");
-      profileTokens.textContent = "250 🪙";
-      profileRank.textContent = "Ашигару";
-
-      registerFormView.style.display = 'none';
-      profilePanelView.classList.add('active');
+      showProfile(savedUser, savedServerLogin);
     }
   });
+
+  // ---------- реальный статус сервера ----------
+  // Используем публичный, бесплатный API mcsrvstat.us — он сам стучится
+  // в Minecraft-сервер по IP и отдаёт актуальный онлайн. Ключ не нужен.
+  // Если сервер offline или API недоступен — честно показываем это,
+  // а не выдумываем цифры.
+  const onlineDot = document.getElementById('onlineDot');
+  const onlineCount = document.getElementById('onlineCount');
+  const onlineStatusText = document.getElementById('onlineStatusText');
+  const onlinePlayers = document.getElementById('onlinePlayers');
+
+  async function refreshServerStatus(){
+    const dict = translations[currentLang];
+    try{
+      const res = await fetch('https://api.mcsrvstat.us/3/olympworld.fun');
+      if(!res.ok) throw new Error('bad response');
+      const data = await res.json();
+
+      if(data.online){
+        onlineDot.className = 'online-widget-dot on';
+        onlineCount.textContent = (data.players && typeof data.players.online === 'number') ? data.players.online : '0';
+        onlineStatusText.textContent = dict.online_players_label;
+
+        onlinePlayers.innerHTML = '';
+        if(data.players && Array.isArray(data.players.list)){
+          data.players.list.slice(0, 8).forEach(name => {
+            const li = document.createElement('li');
+            li.textContent = name;
+            onlinePlayers.appendChild(li);
+          });
+        }
+      } else {
+        onlineDot.className = 'online-widget-dot off';
+        onlineCount.textContent = '0';
+        onlineStatusText.textContent = dict.online_offline;
+        onlinePlayers.innerHTML = '';
+      }
+    }catch(err){
+      onlineDot.className = 'online-widget-dot off';
+      onlineCount.textContent = '—';
+      onlineStatusText.textContent = dict.online_error;
+      console.warn('Не удалось получить статус сервера', err);
+    }
+  }
+  refreshServerStatus();
+  setInterval(refreshServerStatus, 60000); // обновляем раз в минуту
+
+  // ---------- кнопка "наверх" ----------
+  const toTopBtn = document.getElementById('toTopBtn');
+  window.addEventListener('scroll', () => {
+    toTopBtn.classList.toggle('show', window.scrollY > 500);
+  });
+  toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ---------- плавное появление секций при скролле ----------
+  document.querySelectorAll('main > section, .cta-band').forEach(el => el.classList.add('reveal'));
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 
 </body>
