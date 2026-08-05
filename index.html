@@ -81,7 +81,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 32px;
+    padding: 14px 32px;
     max-width: 1180px;
     margin: 0 auto;
     gap: 20px;
@@ -115,7 +115,38 @@
   .nav-right-group {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+  }
+
+  /* Шапка з профілем */
+  .header-user-badge {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .header-user-badge.active { display: flex; }
+  .header-user-badge .user-avatar {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    image-rendering: pixelated;
+  }
+  .header-user-badge .user-rank {
+    background: rgba(255,122,41,0.15);
+    color: var(--orange);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .header-user-badge .user-balance {
+    color: var(--gold);
+    font-weight: 600;
   }
 
   .lang-btn {
@@ -535,6 +566,18 @@
     gap: 20px;
     margin-bottom: 24px;
   }
+  .profile-user-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .profile-avatar {
+    width: 54px; height: 54px;
+    border-radius: 10px;
+    border: 2px solid var(--orange);
+    image-rendering: pixelated;
+    background: #170e07;
+  }
   .profile-user-info h4{ font-size: 22px; font-weight: 700; color: var(--gold); margin: 0 0 4px; }
   .profile-user-info span{ font-size: 13px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
 
@@ -557,7 +600,7 @@
   /* Блок донату */
   .donate{ padding: 20px 32px 120px; }
   .donate-widget{
-    max-width: 980px;
+    max-width: 1040px;
     margin: 0 auto;
     background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
     border: 1px solid rgba(255,122,41,0.3);
@@ -617,6 +660,13 @@
   }
   .priv-features li{ margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
   .priv-features li::before{ content: "—"; color: var(--orange); }
+  
+  .priv-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .priv-pay-btn{
     width: 100%;
     background: linear-gradient(135deg, var(--gold), var(--orange));
@@ -624,7 +674,7 @@
     border-radius: 8px;
     padding: 10px;
     font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: #170e07;
     cursor: pointer;
@@ -638,6 +688,27 @@
     text-decoration: none;
   }
   .priv-pay-btn:hover{ opacity: 0.9; transform: translateY(-1px); }
+
+  .priv-token-btn {
+    width: 100%;
+    background: rgba(255,122,41,0.12);
+    border: 1px solid var(--orange);
+    border-radius: 8px;
+    padding: 9px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--orange);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .priv-token-btn:hover { background: var(--orange); color: #170e07; }
+
   .donatik-icon{
     display: inline-flex;
     align-items: center;
@@ -816,7 +887,8 @@
     font-size: 12px;
     color: var(--text-muted);
   }
-  .online-widget-players li{ padding: 3px 0; }
+  .online-widget-players li{ padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+  .online-widget-players li img { width: 16px; height: 16px; border-radius: 2px; }
   @media (max-width: 1150px){
     .online-widget{ display: none; }
   }
@@ -924,6 +996,13 @@
       </div>
     </div>
     <div class="nav-right-group">
+      <!-- Блок статусу балансу та рангу в шапці -->
+      <a href="#auth" class="header-user-badge" id="headerUserBadge">
+        <img src="" id="headerUserAvatar" class="user-avatar" alt="Avatar">
+        <span class="user-rank" id="headerUserRank">Игрок</span>
+        <span class="user-balance" id="headerUserBalance">0 🪙</span>
+      </a>
+
       <span class="status-pill"><span class="status-dot"></span><span data-i18n="status_online">Сервер онлайн</span></span>
 
       <button class="lang-btn" id="langBtn" type="button">
@@ -1149,34 +1228,39 @@
         <!-- Особистий кабінет -->
         <div class="profile-panel" id="profilePanelView">
           <div class="profile-header-card">
-            <div class="profile-user-info">
-              <h4 id="profileUsername">Player</h4>
-              <span id="profileServerLoginInfo">—</span>
+            <div class="profile-user-wrapper">
+              <img id="profileAvatarImg" class="profile-avatar" src="" alt="Skin Avatar">
+              <div class="profile-user-info">
+                <h4 id="profileUsername">Player</h4>
+                <span id="profileServerLoginInfo">—</span>
+              </div>
             </div>
-            <button type="button" class="btn btn-ghost" id="logoutBtn" style="padding: 10px 20px; font-size: 13px;" data-i18n="btn_logout">Выйти</button>
+            <div style="display: flex; gap: 10px;">
+              <button type="button" class="btn btn-ghost" id="logoutBtn" style="padding: 10px 20px; font-size: 13px;" data-i18n="btn_logout">Выйти</button>
+            </div>
           </div>
 
           <div class="profile-stats-grid">
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_tokens">Баланс токенов</span>
-              <span class="stat-val" id="profileTokens">— 🪙</span>
+              <span class="stat-val" id="profileTokens">0 🪙</span>
             </div>
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_rank">Ранг на сервере</span>
-              <span class="stat-val" id="profileRank" style="color:var(--orange)">—</span>
+              <span class="stat-val" id="profileRank" style="color:var(--orange)">Игрок</span>
             </div>
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_kills">Убийств</span>
-              <span class="stat-val">—</span>
+              <span class="stat-val" id="profileKills">0</span>
             </div>
             <div class="stat-card">
               <span class="stat-label" data-i18n="stat_deaths">Смертей</span>
-              <span class="stat-val">—</span>
+              <span class="stat-val" id="profileDeaths">0</span>
             </div>
           </div>
 
           <div style="text-align: center; color: var(--text-muted); font-size: 13.5px;" data-i18n="profile_notice">
-            Аккаунт запомнен в этом браузере. Токены, ранг и статистика — демо-значения до подключения игрового бекенда.
+            Аккаунт авторизован. Вы можете покупать привилегии за токены прямо на сайте!
           </div>
         </div>
 
@@ -1189,7 +1273,7 @@
       <div class="section-head">
         <div class="eyebrow">支援</div>
         <h2 data-i18n="donate_title">Игровые привилегии</h2>
-        <p data-i18n="donate_sub">Выберите желаемый ранг и переходите к оплате на защищенную платформу.</p>
+        <p data-i18n="donate_sub">Выберите желаемый ранг и переходите к оплате или покупайте за токены.</p>
       </div>
 
       <div class="donate-widget">
@@ -1211,7 +1295,10 @@
               <li data-i18n="p_ashigaru_f2">Значок в чате</li>
               <li data-i18n="p_ashigaru_f3">Доступ /kit Ашигару</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+            <div class="priv-actions">
+              <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+              <button class="priv-token-btn" onclick="buyPrivilege('Ашигару', 100)"><span data-i18n="btn_buy_tokens">100 🪙</span></button>
+            </div>
           </div>
 
           <div class="priv-card">
@@ -1226,7 +1313,10 @@
               <li data-i18n="p_ronin_f4">Доступ /kit Ронина</li>
               <li data-i18n="p_ronin_f5">Роль в Discord</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+            <div class="priv-actions">
+              <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+              <button class="priv-token-btn" onclick="buyPrivilege('Ронин', 200)"><span data-i18n="btn_buy_tokens">200 🪙</span></button>
+            </div>
           </div>
 
           <div class="priv-card">
@@ -1241,7 +1331,10 @@
               <li data-i18n="p_samurai_f3">Титул "Самурай"</li>
               <li data-i18n="p_samurai_f4">Роль в Discord</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+            <div class="priv-actions">
+              <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+              <button class="priv-token-btn" onclick="buyPrivilege('Самурай', 500)"><span data-i18n="btn_buy_tokens">500 🪙</span></button>
+            </div>
           </div>
 
           <div class="priv-card">
@@ -1254,7 +1347,10 @@
               <li data-i18n="p_shogun_f2">Создание одного /warp</li>
               <li data-i18n="p_shogun_f3">Эксклюзивные партиклы по желанию</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+            <div class="priv-actions">
+              <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+              <button class="priv-token-btn" onclick="buyPrivilege('Сёгун', 1000)"><span data-i18n="btn_buy_tokens">1000 🪙</span></button>
+            </div>
           </div>
 
           <div class="priv-card top">
@@ -1270,7 +1366,10 @@
               <li data-i18n="p_emperor_f4">Кастомный /warp с уникальным названием</li>
               <li data-i18n="p_emperor_f5">Уникальный титул и цвет ника</li>
             </ul>
-            <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+            <div class="priv-actions">
+              <a href="https://olympiumworld.donatik.ua" target="_blank" rel="noopener" class="priv-pay-btn"><span class="donatik-icon">D</span><span data-i18n="btn_donate_small">Донат</span></a>
+              <button class="priv-token-btn" onclick="buyPrivilege('Император', 2000)"><span data-i18n="btn_buy_tokens">2000 🪙</span></button>
+            </div>
           </div>
         </div>
 
@@ -1302,7 +1401,7 @@
             <span class="sign">+</span>
           </button>
           <div class="faq-a">
-            <p data-i18n="faq2_a">Привилегии можно приобрести в разделе «Донат» на этом сайте — оплата проходит через Donatik. После оплаты ранг выдается вручную в течение нескольких минут.</p>
+            <p data-i18n="faq2_a">Привилегии можно приобрести в разделе «Донат» на этом сайте за реальные деньги или напрямую за токены в личном кабинете.</p>
           </div>
         </div>
       </div>
@@ -1416,18 +1515,19 @@
       stat_rank: "Ранг на сервере",
       stat_kills: "Убийств",
       stat_deaths: "Смертей",
-      profile_notice: "Аккаунт запомнен в этом браузере. Токены, ранг и статистика — демо-значения до подключения игрового бекенда.",
+      profile_notice: "Аккаунт авторизован. Вы можете покупать привилегии за токены прямо на сайте!",
       error_fields: "Заполните все обязательные поля формы!",
       privacy_note: "Мы запоминаем твой аккаунт в этом браузере, чтобы не вводить данные заново. Пароли нигде не сохраняются — ни на сервере, ни локально.",
       profile_server_label: "Ник на сервере:",
       donate_title: "Игровые привилегии",
-      donate_sub: "Выберите желаемый ранг и переходите к оплате на защищенную платформу.",
+      donate_sub: "Выберите желаемый ранг и переходите к оплате или покупайте за токены.",
       widget_title: "Магазин рангов",
       widget_desc: "Поддержите развитие проекта и получите эксклюзивные команды, титулы и статус в чате.",
       label_privileges: "Доступные привилегии",
       badge_popular: "Популярный",
       badge_max: "Максимальный ранг",
       btn_donate_small: "Донат",
+      btn_buy_tokens: "Купить",
       currency_uah: "грн",
       p_ashigaru_title: "Ашигару",
       p_ashigaru_f1: "Одна точка /sethome",
@@ -1459,9 +1559,12 @@
       faq1_q: "Как зайти на сервер?",
       faq1_a: "Скопируйте IP адрес olympworld.fun в главном меню игры (Мультиплеер -> Добавить сервер) и подключайтесь. Версия клиента должна быть 1.20.6.",
       faq2_q: "Где купить донат привилегии?",
-      faq2_a: "Привилегии можно приобрести в разделе «Донат» на этом сайте — оплата проходит через Donatik. После оплаты ранг выдается вручную в течение нескольких минут.",
+      faq2_a: "Привилегии можно приобрести в разделе «Донат» на этом сайте за реальные деньги или напрямую за токены в личном кабинете.",
       cta_title: "Готовы присоединиться?",
-      cta_sub: "Сервер работает 24/7. Ждем вас в мире Олимпа!"
+      cta_sub: "Сервер работает 24/7. Ждем вас в мире Олимпа!",
+      msg_login_first: "Сначала авторизуйтесь или зарегистрируйтесь на сайте!",
+      msg_not_enough_tokens: "Недостаточно токенов на балансе!",
+      msg_success_buy: "Поздравляем! Вы успешно приобрели привилегию:"
     },
     ua: {
       nav_home: "Головна",
@@ -1504,7 +1607,7 @@
       step3_title: "Приєднання",
       step3_desc: "Запусти Minecraft, натисни «Мультиплеєр» → «Додати сервер» та встав IP <b>olympworld.fun</b>. Готово — ласкаво просимо у світ Олімпа!",
       features_title: "Особливості сервера",
-      features_sub: "Сервер побудований навколо естетики класичної Японії з унікальними механіками.",
+      features_sub: "Сервер побудований навколо естетики класичної Японії з унікальними механиками.",
       feat1_title: "Шокер",
       feat1_desc: "Кастомний інструмент, що завдає шкоди без відкидання ворога.",
       feat2_title: "Слизева хвиля",
@@ -1528,18 +1631,19 @@
       stat_rank: "Ранг на сервері",
       stat_kills: "Вбивств",
       stat_deaths: "Смертей",
-      profile_notice: "Акаунт запам'ятано в цьому браузері. Токени, ранг і статистика — демо-значення до підключення ігрового бекенду.",
+      profile_notice: "Акаунт авторизовано. Ви можете купувати привілеї за токени прямо на сайті!",
       error_fields: "Заповніть усі обов'язкові поля форми!",
       privacy_note: "Ми запам'ятовуємо твій акаунт у цьому браузері, щоб не вводити дані знову. Паролі ніде не зберігаються — ні на сервері, ні локально.",
       profile_server_label: "Нік на сервері:",
       donate_title: "Ігрові привілеї",
-      donate_sub: "Виберіть бажаний ранг та переходьте до оплати на захищеній платформі.",
+      donate_sub: "Виберіть бажаний ранг та переходьте до оплати або купуйте за токени.",
       widget_title: "Магазин рангів",
       widget_desc: "Підтримайте розвиток проєкту та отримайте ексклюзивні команди, титули і статус у чаті.",
       label_privileges: "Доступні привілеї",
       badge_popular: "Популярний",
       badge_max: "Максимальний ранг",
       btn_donate_small: "Донат",
+      btn_buy_tokens: "Купити",
       currency_uah: "грн",
       p_ashigaru_title: "Ашигару",
       p_ashigaru_f1: "Одна точка /sethome",
@@ -1571,9 +1675,12 @@
       faq1_q: "Як зайти на сервер?",
       faq1_a: "Скопіюйте IP адресу olympworld.fun в головному меню гри (Мультиплеєр -> Додати сервер) та підключайтеся. Версія клієнта має бути 1.20.6.",
       faq2_q: "Де купити донат привілеї?",
-      faq2_a: "Привілеї можна придбати в розділі «Донат» на цьому сайті — оплата проходить через Donatik. Після оплати ранг видається вручну протягом кількох хвилин.",
+      faq2_a: "Привілеї можна придбати в розділі «Донат» на цьому сайті за реальні гроші або напряму за токени в особистому кабінеті.",
       cta_title: "Готові приєднатися?",
-      cta_sub: "Сервер працює 24/7. Чекаємо на вас у світі Олімпа!"
+      cta_sub: "Сервер працює 24/7. Чекаємо на вас у світі Олімпа!",
+      msg_login_first: "Спочатку авторизуйтесь або зареєструйтесь на сайті!",
+      msg_not_enough_tokens: "Недостатньо токенів на балансі!",
+      msg_success_buy: "Вітаємо! Ви успішно придбали привілею:"
     }
   };
 
@@ -1599,7 +1706,6 @@
         el.innerHTML = dict[key];
       }
     });
-    // Профиль (если открыт) тоже пересобираем на новом языке
     if (profilePanelView.classList.contains('active')) {
       const serverLogin = localStorage.getItem('olymp_server_login') || '-';
       profileServerLoginInfo.textContent = dict.profile_server_label + ' ' + serverLogin;
@@ -1648,19 +1754,7 @@
     });
   });
 
-  // ---------- Реєстрація та кабінет ----------
-  // "Запам'ятовування акаунта" реалізовано через localStorage — це РЕАЛЬНО працює
-  // і переживає закриття вкладки/браузера, на відміну від sessionStorage раніше.
-  // Обмеження, яке чесно варто знати: localStorage прив'язаний до конкретного браузера
-  // на конкретному пристрої — акаунт НЕ буде видно, якщо зайти з іншого браузера
-  // чи телефону. Повноцінний акаунт "з будь-якого пристрою" вимагає бекенду й бази
-  // даних на сервері (те саме обмеження, що і з платежами).
-  //
-  // Паролі (сайтовий і особливо серверний, від /login на майнкрафт-акаунті)
-  // НІКУДИ не зберігаються — ні в localStorage, ні деінде. Це свідоме рішення:
-  // зберігати паролі в браузері в незашифрованому вигляді небезпечно, а справжня
-  // перевірка пароля повинна відбуватись лише на сервері (плагін типу AuthMe),
-  // а не в браузері гравця.
+  // ---------- Реєстрація, кабінет та токени ----------
   const regForm = document.getElementById('regForm');
   const registerFormView = document.getElementById('registerFormView');
   const profilePanelView = document.getElementById('profilePanelView');
@@ -1671,14 +1765,42 @@
   const profileServerLoginInfo = document.getElementById('profileServerLoginInfo');
   const profileTokens = document.getElementById('profileTokens');
   const profileRank = document.getElementById('profileRank');
+  const profileAvatarImg = document.getElementById('profileAvatarImg');
+
+  const headerUserBadge = document.getElementById('headerUserBadge');
+  const headerUserAvatar = document.getElementById('headerUserAvatar');
+  const headerUserRank = document.getElementById('headerUserRank');
+  const headerUserBalance = document.getElementById('headerUserBalance');
+
+  function updateUserDataUI() {
+    const tokens = localStorage.getItem('olymp_tokens') || '250';
+    const rank = localStorage.getItem('olymp_rank') || 'Игрок';
+    const serverLogin = localStorage.getItem('olymp_server_login') || 'Steve';
+    const dict = translations[currentLang];
+
+    profileTokens.textContent = `${tokens} 🪙`;
+    profileRank.textContent = rank;
+    
+    // Оновлення аватара гравця за ніком з серверу
+    const avatarUrl = `https://mc-heads.net/avatar/${serverLogin}/64`;
+    profileAvatarImg.src = avatarUrl;
+    headerUserAvatar.src = avatarUrl;
+
+    // Шапка
+    headerUserRank.textContent = rank;
+    headerUserBalance.textContent = `${tokens} 🪙`;
+    headerUserBadge.classList.add('active');
+  }
 
   function showProfile(login, serverLogin){
     const dict = translations[currentLang];
     profileUsername.textContent = login;
     profileServerLoginInfo.textContent = dict.profile_server_label + ' ' + (serverLogin || '-');
-    // Демо-значения: реальные токены/ранг/статистику должен отдавать игровой бекенд
-    profileTokens.textContent = '250 🪙';
-    profileRank.textContent = 'Ашигару';
+
+    if (!localStorage.getItem('olymp_tokens')) localStorage.setItem('olymp_tokens', '250');
+    if (!localStorage.getItem('olymp_rank')) localStorage.setItem('olymp_rank', 'Игрок');
+
+    updateUserDataUI();
 
     registerFormView.style.display = 'none';
     profilePanelView.classList.add('active');
@@ -1698,7 +1820,6 @@
     }
     authError.classList.remove('show');
 
-    // Сохраняем в localStorage только не чувствительные данные — без паролей
     localStorage.setItem('olymp_user', login);
     localStorage.setItem('olymp_server_login', serverLogin);
     localStorage.setItem('olymp_email', email);
@@ -1711,10 +1832,39 @@
     localStorage.removeItem('olymp_user');
     localStorage.removeItem('olymp_server_login');
     localStorage.removeItem('olymp_email');
+    localStorage.removeItem('olymp_tokens');
+    localStorage.removeItem('olymp_rank');
+    
+    headerUserBadge.classList.remove('active');
     regForm.reset();
     profilePanelView.classList.remove('active');
     registerFormView.style.display = 'block';
   });
+
+  // Функція купівлі привілеїв за токени
+  window.buyPrivilege = function(rankName, cost) {
+    const dict = translations[currentLang];
+    const savedUser = localStorage.getItem('olymp_user');
+
+    if (!savedUser) {
+      alert(dict.msg_login_first);
+      window.location.hash = '#auth';
+      return;
+    }
+
+    let currentTokens = parseInt(localStorage.getItem('olymp_tokens') || '0');
+    if (currentTokens < cost) {
+      alert(dict.msg_not_enough_tokens);
+      return;
+    }
+
+    currentTokens -= cost;
+    localStorage.setItem('olymp_tokens', currentTokens.toString());
+    localStorage.setItem('olymp_rank', rankName);
+    
+    updateUserDataUI();
+    alert(`${dict.msg_success_buy} ${rankName}!`);
+  };
 
   window.addEventListener('DOMContentLoaded', () => {
     updateLanguage();
@@ -1725,11 +1875,7 @@
     }
   });
 
-  // ---------- реальный статус сервера ----------
-  // Используем публичный, бесплатный API mcsrvstat.us — он сам стучится
-  // в Minecraft-сервер по IP и отдаёт актуальный онлайн. Ключ не нужен.
-  // Если сервер offline или API недоступен — честно показываем это,
-  // а не выдумываем цифры.
+  // ---------- реальний статус сервера ----------
   const onlineDot = document.getElementById('onlineDot');
   const onlineCount = document.getElementById('onlineCount');
   const onlineStatusText = document.getElementById('onlineStatusText');
@@ -1749,9 +1895,10 @@
 
         onlinePlayers.innerHTML = '';
         if(data.players && Array.isArray(data.players.list)){
-          data.players.list.slice(0, 8).forEach(name => {
+          data.players.list.slice(0, 8).forEach(player => {
             const li = document.createElement('li');
-            li.textContent = name;
+            const pName = typeof player === 'object' ? player.name : player;
+            li.innerHTML = `<img src="https://mc-heads.net/avatar/${pName}/16" alt=""> ${pName}`;
             onlinePlayers.appendChild(li);
           });
         }
@@ -1765,11 +1912,11 @@
       onlineDot.className = 'online-widget-dot off';
       onlineCount.textContent = '—';
       onlineStatusText.textContent = dict.online_error;
-      console.warn('Не удалось получить статус сервера', err);
+      console.warn('Не вдалося отримати статус сервера', err);
     }
   }
   refreshServerStatus();
-  setInterval(refreshServerStatus, 60000); // обновляем раз в минуту
+  setInterval(refreshServerStatus, 60000);
 
   // ---------- кнопка "наверх" ----------
   const toTopBtn = document.getElementById('toTopBtn');
@@ -1778,7 +1925,7 @@
   });
   toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ---------- плавное появление секций при скролле ----------
+  // ---------- плавне поява секцій при скролі ----------
   document.querySelectorAll('main > section, .cta-band').forEach(el => el.classList.add('reveal'));
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
