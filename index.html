@@ -118,7 +118,6 @@
     gap: 14px;
   }
 
-  /* Шапка з профілем */
   .header-user-badge {
     display: none;
     align-items: center;
@@ -464,7 +463,6 @@
   .feature-card h4{ font-size: 16px; font-weight: 700; margin-bottom: 8px; }
   .feature-card p{ font-size: 13.5px; color: var(--text-muted); margin: 0; }
 
-  /* Блок Реєстрації / Акаунта */
   .auth-section{ padding: 20px 32px 120px; }
   .auth-widget{
     max-width: 860px;
@@ -543,7 +541,6 @@
     line-height: 1.5;
   }
 
-  /* Кабінет гравця */
   .profile-panel{
     display: none;
     animation: fadeIn 0.4s ease forwards;
@@ -597,7 +594,6 @@
   .stat-card .stat-label{ font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: block; margin-bottom: 6px; }
   .stat-card .stat-val{ font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--gold); }
 
-  /* Блок донату */
   .donate{ padding: 20px 32px 120px; }
   .donate-widget{
     max-width: 1040px;
@@ -796,7 +792,6 @@
   .cta-band .btn-primary{ background: #170e07; color: var(--gold); box-shadow: none; }
   .cta-band .btn-primary:hover{ background: #241609; }
 
-  /* ---------- category strip ---------- */
   .category-strip{ padding: 10px 32px 90px; }
   .category-grid{
     display: grid;
@@ -835,7 +830,7 @@
   .category-title{ font-weight: 700; font-size: 15.5px; color: var(--text); }
   .category-sub{ font-size: 12.5px; color: var(--text-muted); }
 
-  /* ---------- online widget (right strip) ---------- */
+  /* Онлайн віджет з форматом 4/150 */
   .online-widget{
     position: fixed;
     right: 20px;
@@ -893,7 +888,51 @@
     .online-widget{ display: none; }
   }
 
-  /* ---------- back to top ---------- */
+  /* Цікавинка: Інтерактивний японський ліхтар / Оракул удачі (зліва) */
+  .fortune-widget {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    width: 170px;
+    background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border: 1px solid rgba(242,183,5,0.3);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .fortune-widget h5 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    color: var(--gold);
+    margin: 0 0 6px;
+  }
+  .fortune-widget p {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+    min-height: 32px;
+  }
+  .fortune-btn {
+    background: rgba(242,183,5,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 6px;
+    font-size: 11px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+  .fortune-btn:hover { background: var(--gold); color: #170e07; }
+  @media (max-width: 1300px) {
+    .fortune-widget { display: none; }
+  }
+
   .to-top-btn{
     position: fixed;
     right: 20px;
@@ -918,7 +957,6 @@
   .to-top-btn.show{ opacity: 1; pointer-events: auto; transform: translateY(0); }
   .to-top-btn:hover{ background: var(--orange); color: #170e07; }
 
-  /* ---------- scroll reveal ---------- */
   .reveal{ opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible{ opacity: 1; transform: translateY(0); }
 
@@ -996,7 +1034,6 @@
       </div>
     </div>
     <div class="nav-right-group">
-      <!-- Блок статусу балансу та рангу в шапці -->
       <a href="#auth" class="header-user-badge" id="headerUserBadge">
         <img src="" id="headerUserAvatar" class="user-avatar" alt="Avatar">
         <span class="user-rank" id="headerUserRank">Игрок</span>
@@ -1162,7 +1199,6 @@
     </div>
   </section>
 
-  <!-- БЛОК РЕЄСТРАЦІЇ / ОСОБИСТОГО КАБІНЕТУ -->
   <section class="auth-section" id="auth">
     <div class="wrap">
       <div class="section-head">
@@ -1173,7 +1209,6 @@
 
       <div class="auth-widget">
 
-        <!-- Форма реєстрації -->
         <div id="registerFormView">
           <div class="widget-top">
             <h3 data-i18n="reg_title">Создать игровой аккаунт</h3>
@@ -1225,7 +1260,6 @@
           </form>
         </div>
 
-        <!-- Особистий кабінет -->
         <div class="profile-panel" id="profilePanelView">
           <div class="profile-header-card">
             <div class="profile-user-wrapper">
@@ -1418,12 +1452,20 @@
 
 </main>
 
+<!-- Східний Оракул Удачи (Цікавинка зліва) -->
+<div class="fortune-widget" id="fortuneWidget">
+  <h5>⛩️ Оракул Карми</h5>
+  <p id="fortuneText">Нажми, щоб дізнатися свою удачу на сьогодні в Olymp World!</p>
+  <button class="fortune-btn" id="fortuneBtn" type="button">Отримати благословення</button>
+</div>
+
+<!-- Віджет онлайн (Формат 4/150) -->
 <div class="online-widget" id="onlineWidget">
   <div class="online-widget-head">
     <span class="online-widget-dot" id="onlineDot"></span>
     <span data-i18n="online_label">Сервер</span>
   </div>
-  <div class="online-widget-count" id="onlineCount">—</div>
+  <div class="online-widget-count" id="onlineCount">0/150</div>
   <div class="online-widget-label" id="onlineStatusText" data-i18n="online_loading">Проверяем статус…</div>
   <ul class="online-widget-players" id="onlinePlayers"></ul>
 </div>
@@ -1466,7 +1508,7 @@
       cat_donate_sub: "Магазин рангов сервера",
       online_label: "Сервер",
       online_loading: "Проверяем статус…",
-      online_players_label: "игроков онлайн",
+      online_players_label: "гравців онлайн",
       online_offline: "Сервер сейчас offline",
       online_error: "Не удалось получить статус",
       hero_eyebrow: "御 山 の 世 界 · Season One",
@@ -1754,7 +1796,6 @@
     });
   });
 
-  // ---------- Реєстрація, кабінет та токени ----------
   const regForm = document.getElementById('regForm');
   const registerFormView = document.getElementById('registerFormView');
   const profilePanelView = document.getElementById('profilePanelView');
@@ -1776,17 +1817,14 @@
     const tokens = localStorage.getItem('olymp_tokens') || '250';
     const rank = localStorage.getItem('olymp_rank') || 'Игрок';
     const serverLogin = localStorage.getItem('olymp_server_login') || 'Steve';
-    const dict = translations[currentLang];
 
     profileTokens.textContent = `${tokens} 🪙`;
     profileRank.textContent = rank;
     
-    // Оновлення аватара гравця за ніком з серверу
     const avatarUrl = `https://mc-heads.net/avatar/${serverLogin}/64`;
     profileAvatarImg.src = avatarUrl;
     headerUserAvatar.src = avatarUrl;
 
-    // Шапка
     headerUserRank.textContent = rank;
     headerUserBalance.textContent = `${tokens} 🪙`;
     headerUserBadge.classList.add('active');
@@ -1841,7 +1879,6 @@
     registerFormView.style.display = 'block';
   });
 
-  // Функція купівлі привілеїв за токени
   window.buyPrivilege = function(rankName, cost) {
     const dict = translations[currentLang];
     const savedUser = localStorage.getItem('olymp_user');
@@ -1875,7 +1912,22 @@
     }
   });
 
-  // ---------- реальний статус сервера ----------
+  // Цікавинка: логіка Оракула Карми
+  const fortuneBtn = document.getElementById('fortuneBtn');
+  const fortuneText = document.getElementById('fortuneText');
+  const fortunes = [
+    "🌸 Сьогодні Самурайські Духи оберігають твій інвентар від втрати!",
+    "⚡ Велика удача! Шанс знайти незерит у шахті збільшено вдвічі.",
+    "🍵 Час спокою: жоден гравець не нападе на твою базу найближчу годину.",
+    "⚔️ Твоя катана сьогодні гостріша за звичайне. Час для дуелі!",
+    "⛩️ Император посміхається тобі! Очікуй приємного сюрпризу в чаті."
+  ];
+  fortuneBtn.addEventListener('click', () => {
+    const randomMsg = fortunes[Math.floor(Math.random() * fortunes.length)];
+    fortuneText.textContent = randomMsg;
+  });
+
+  // ---------- Швидка синхронізація статусу сервера (4/150) ----------
   const onlineDot = document.getElementById('onlineDot');
   const onlineCount = document.getElementById('onlineCount');
   const onlineStatusText = document.getElementById('onlineStatusText');
@@ -1890,7 +1942,12 @@
 
       if(data.online){
         onlineDot.className = 'online-widget-dot on';
-        onlineCount.textContent = (data.players && typeof data.players.online === 'number') ? data.players.online : '0';
+        const currentOnline = (data.players && typeof data.players.online === 'number') ? data.players.online : '0';
+        
+        // Формат 4/150 (беремо макс ліміт із сервера або ставимо 150 за замовчуванням)
+        const maxLimit = (data.players && data.players.max) ? data.players.max : 150;
+        onlineCount.textContent = `${currentOnline}/${maxLimit}`;
+        
         onlineStatusText.textContent = dict.online_players_label;
 
         onlinePlayers.innerHTML = '';
@@ -1904,28 +1961,28 @@
         }
       } else {
         onlineDot.className = 'online-widget-dot off';
-        onlineCount.textContent = '0';
+        onlineCount.textContent = '0/150';
         onlineStatusText.textContent = dict.online_offline;
         onlinePlayers.innerHTML = '';
       }
     }catch(err){
       onlineDot.className = 'online-widget-dot off';
-      onlineCount.textContent = '—';
+      onlineCount.textContent = '—/150';
       onlineStatusText.textContent = dict.online_error;
       console.warn('Не вдалося отримати статус сервера', err);
     }
   }
   refreshServerStatus();
-  setInterval(refreshServerStatus, 60000);
+  
+  // Максимально швидка синхронізація (кожні 3 секунди для миттєвого відображення входу/виходу)
+  setInterval(refreshServerStatus, 3000);
 
-  // ---------- кнопка "наверх" ----------
   const toTopBtn = document.getElementById('toTopBtn');
   window.addEventListener('scroll', () => {
     toTopBtn.classList.toggle('show', window.scrollY > 500);
   });
   toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ---------- плавне поява секцій при скролі ----------
   document.querySelectorAll('main > section, .cta-band').forEach(el => el.classList.add('reveal'));
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
